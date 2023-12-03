@@ -22,7 +22,7 @@ std::vector<std::string> split(std::string s, std::string delimiter) {
 
 int day2(bool part)
 {
-	std::ifstream input("day2input.txt");
+	std::ifstream input("./src/input/day2input.txt");
 	std::string line{};
 	const int NUM_RED = 12;
 	const int NUM_GREEN = 13;

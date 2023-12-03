@@ -18,6 +18,15 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\dayLinker.hh" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\day1.cpp" />
+    <ClCompile Include="src\day2.cpp" />
+    <ClCompile Include="src\day3.cpp" />
+    <ClCompile Include="src\daySelector.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -126,13 +135,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="day1.cpp" />
-    <ClCompile Include="dayLinker.hh" />
-    <ClCompile Include="day2.cpp" />
-    <ClCompile Include="day3.cpp" />
-    <ClCompile Include="daySelector.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
