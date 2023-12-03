@@ -4,7 +4,7 @@
 #include <ctype.h>;
 #include <iostream>;
 
-int main(int argc, char* argv[])
+int day3(int argc, char** argv)
 {
 	// setting up data storage
 	std::vector<std::string> lines{};

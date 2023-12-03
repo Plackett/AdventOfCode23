@@ -1,9 +1,2 @@
-﻿  day3.cpp
-C:\Users\johnn\Desktop\AdventOfCodeDec2023\AdventOfCodeDec2023\day3.cpp(1,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\johnn\Desktop\AdventOfCodeDec2023\AdventOfCodeDec2023\day3.cpp(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\johnn\Desktop\AdventOfCodeDec2023\AdventOfCodeDec2023\day3.cpp(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\johnn\Desktop\AdventOfCodeDec2023\AdventOfCodeDec2023\day3.cpp(4,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\johnn\Desktop\AdventOfCodeDec2023\AdventOfCodeDec2023\day3.cpp(5,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\johnn\Desktop\AdventOfCodeDec2023\AdventOfCodeDec2023\day3.cpp(114,36): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\johnn\Desktop\AdventOfCodeDec2023\AdventOfCodeDec2023\day3.cpp(140,36): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+﻿  day2.cpp
   AdventOfCodeDec2023.vcxproj -> C:\Users\johnn\Desktop\AdventOfCodeDec2023\x64\Debug\AdventOfCodeDec2023.exe
