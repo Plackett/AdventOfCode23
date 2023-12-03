@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include "dayLinker.hh"
 
 // for string delimiter
 std::vector<std::string> split(std::string s, std::string delimiter) {
@@ -19,7 +20,7 @@ std::vector<std::string> split(std::string s, std::string delimiter) {
 	return res;
 }
 
-int day2(int argc, char** argv)
+int day2(bool part)
 {
 	std::ifstream input("day2input.txt");
 	std::string line{};
@@ -49,10 +50,6 @@ int day2(int argc, char** argv)
 				for (std::string game : games)
 				{
 					colors = split(game, " ");
-					/*std::cout << split(split(line, ": ")[0], " ")[1] << std::endl;
-					std::cout << game << std::endl;
-					std::cout << colors[1] << std::endl;
-					std::cout << colors[0] << std::endl;*/
 					switch (colors[1][0])
 					{
 					case 'r':
@@ -89,13 +86,19 @@ int day2(int argc, char** argv)
 				}
 			}
 			// part one
-			/*if (possible)
+			if (!part)
 			{
-				std::cout << "this line works! " << line << std::endl;
-				numSuccess += std::stoi(split(split(line, ": ")[0], " ")[1]);
-			}*/
-			// part two
-			numSuccess += minRed * minGreen * minBlue;
+				if (possible)
+				{
+					std::cout << "this line works! " << line << std::endl;
+					numSuccess += std::stoi(split(split(line, ": ")[0], " ")[1]);
+				}
+			}
+			else 
+			{
+				// part two
+				numSuccess += minRed * minGreen * minBlue;
+			}
 		}
 		std::cout << "final sum: " << numSuccess << std::endl;
 	}

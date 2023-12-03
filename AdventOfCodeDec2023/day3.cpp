@@ -1,10 +1,11 @@
-#include <fstream>;
-#include <string>;
-#include <vector>;
-#include <ctype.h>;
-#include <iostream>;
+#include <fstream>
+#include <string>
+#include <vector>
+#include <ctype.h>
+#include <iostream>
+#include "dayLinker.hh"
 
-int day3(int argc, char** argv)
+int day3(bool part)
 {
 	// setting up data storage
 	std::vector<std::string> lines{};
@@ -23,131 +24,49 @@ int day3(int argc, char** argv)
 		}
 		// check for a non number, non period character in a 3x3 radius around each number
 		// part 1
-		/*
-		for (int i = 0; i < lines.size(); ++i)
+		if (!part)
 		{
-			for (int j = 0; j < lines.at(i).length(); ++j)
+			for (int i = 0; i < lines.size(); ++i)
 			{
-				if (isdigit(lines.at(i)[j]))
+				for (int j = 0; j < lines.at(i).length(); ++j)
 				{
-					for (int k = i-1; k < i+2; k++)
+					if (isdigit(lines.at(i)[j]))
 					{
-						if (k > -1 && k < lines.size())
+						for (int k = i - 1; k < i + 2; k++)
 						{
-							for (int l = j - 1; l < j + 2; l++)
+							if (k > -1 && k < lines.size())
 							{
-								if (l > -1 && l < lines.at(k).length())
+								for (int l = j - 1; l < j + 2; l++)
 								{
-									if (lines.at(k)[l] != '.' && isdigit(lines.at(k)[l]) == false)
+									if (l > -1 && l < lines.at(k).length())
 									{
-										skip = 0;
-										current = std::string(1, lines.at(i)[j]);
-										for (int m = j-1; m > -1; m--)
-										{
-											if (isdigit(lines.at(i)[m]) == false || lines.at(i)[m] == '.')
-											{
-												m = -1;
-												break;
-											}
-											oldCurrent = current;
-											current = std::string(1,lines.at(i)[m]);
-											current.append(oldCurrent);
-										}
-										for (int n = j+1; n < lines.at(i).length(); n++)
-										{
-											if (isdigit(lines.at(i)[n]) == false || lines.at(i)[n] == '.')
-											{
-												n = lines.at(i).length();
-												break;
-											}
-											current.append(std::string(1,lines.at(i)[n]));
-											skip++;
-										}
-										sum += std::stoi(current);
-										j += skip;
-										break;
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}*/
-		//part 2
-		int firstnumber = 0;
-		for (int i = 0; i < lines.size(); ++i)
-		{
-			for (int j = 0; j < lines.at(i).length(); ++j)
-			{
-				if (lines.at(i)[j] == '*')
-				{
-					for (int k = i - 1; k < i + 2; k++)
-					{
-						if (k > -1 && k < lines.size())
-						{
-							for (int l = j - 1; l < j + 2; l++)
-							{
-								if (l > -1 && l < lines.at(k).length())
-								{
-									if (isdigit(lines.at(k)[l]))
-									{
-										if (firstnumber == 0)
+										if (lines.at(k)[l] != '.' && isdigit(lines.at(k)[l]) == false)
 										{
 											skip = 0;
-											current = std::string(1, lines.at(k)[l]);
-											for (int m = l - 1; m > -1; m--)
+											current = std::string(1, lines.at(i)[j]);
+											for (int m = j - 1; m > -1; m--)
 											{
-												if (isdigit(lines.at(k)[m]) == false || lines.at(k)[m] == '.')
+												if (isdigit(lines.at(i)[m]) == false || lines.at(i)[m] == '.')
 												{
 													m = -1;
 													break;
 												}
 												oldCurrent = current;
-												current = std::string(1, lines.at(k)[m]);
+												current = std::string(1, lines.at(i)[m]);
 												current.append(oldCurrent);
 											}
-											for (int n = l + 1; n < lines.at(l).length(); n++)
+											for (size_t n = j + 1; n < lines.at(i).length(); n++)
 											{
-												if (isdigit(lines.at(k)[n]) == false || lines.at(k)[n] == '.')
+												if (isdigit(lines.at(i)[n]) == false || lines.at(i)[n] == '.')
 												{
-													n = lines.at(k).length();
+													n = lines.at(i).length();
 													break;
 												}
-												current.append(std::string(1, lines.at(k)[n]));
+												current.append(std::string(1, lines.at(i)[n]));
 												skip++;
 											}
-											firstnumber = std::stoi(current);
-											l += skip;
-										}
-										else {
-											current = std::string(1, lines.at(k)[l]);
-											for (int m = l - 1; m > -1; m--)
-											{
-												if (isdigit(lines.at(k)[m]) == false || lines.at(k)[m] == '.')
-												{
-													m = -1;
-													break;
-												}
-												oldCurrent = current;
-												current = std::string(1, lines.at(k)[m]);
-												current.append(oldCurrent);
-											}
-											for (int n = l + 1; n < lines.at(l).length(); n++)
-											{
-												if (isdigit(lines.at(k)[n]) == false || lines.at(k)[n] == '.')
-												{
-													n = lines.at(k).length();
-													break;
-												}
-												current.append(std::string(1, lines.at(k)[n]));
-											}
-											std::cout << firstnumber << "first" << std::endl;
-											std::cout << current << "second" << std::endl;
-											firstnumber *= std::stoi(current);
-											sum += firstnumber;
-											std::cout << sum << std::endl;
-											firstnumber = 0;
+											sum += std::stoi(current);
+											j += skip;
 											break;
 										}
 									}
@@ -155,7 +74,94 @@ int day3(int argc, char** argv)
 							}
 						}
 					}
-					firstnumber = 0;
+				}
+			}
+		}
+		else
+		{
+			//part 2
+			int firstnumber = 0;
+			for (int i = 0; i < lines.size(); ++i)
+			{
+				for (int j = 0; j < lines.at(i).length(); ++j)
+				{
+					if (lines.at(i)[j] == '*')
+					{
+						for (int k = i - 1; k < i + 2; k++)
+						{
+							if (k > -1 && k < lines.size())
+							{
+								for (int l = j - 1; l < j + 2; l++)
+								{
+									if (l > -1 && l < lines.at(k).length())
+									{
+										if (isdigit(lines.at(k)[l]))
+										{
+											if (firstnumber == 0)
+											{
+												skip = 0;
+												current = std::string(1, lines.at(k)[l]);
+												for (int m = l - 1; m > -1; m--)
+												{
+													if (isdigit(lines.at(k)[m]) == false || lines.at(k)[m] == '.')
+													{
+														m = -1;
+														break;
+													}
+													oldCurrent = current;
+													current = std::string(1, lines.at(k)[m]);
+													current.append(oldCurrent);
+												}
+												for (int n = l + 1; n < lines.at(l).length(); n++)
+												{
+													if (isdigit(lines.at(k)[n]) == false || lines.at(k)[n] == '.')
+													{
+														n = lines.at(k).length();
+														break;
+													}
+													current.append(std::string(1, lines.at(k)[n]));
+													skip++;
+												}
+												firstnumber = std::stoi(current);
+												l += skip;
+											}
+											else {
+												current = std::string(1, lines.at(k)[l]);
+												for (int m = l - 1; m > -1; m--)
+												{
+													if (isdigit(lines.at(k)[m]) == false || lines.at(k)[m] == '.')
+													{
+														m = -1;
+														break;
+													}
+													oldCurrent = current;
+													current = std::string(1, lines.at(k)[m]);
+													current.append(oldCurrent);
+												}
+												for (int n = l + 1; n < lines.at(l).length(); n++)
+												{
+													if (isdigit(lines.at(k)[n]) == false || lines.at(k)[n] == '.')
+													{
+														n = lines.at(k).length();
+														break;
+													}
+													current.append(std::string(1, lines.at(k)[n]));
+												}
+												std::cout << firstnumber << "first" << std::endl;
+												std::cout << current << "second" << std::endl;
+												firstnumber *= std::stoi(current);
+												sum += firstnumber;
+												std::cout << sum << std::endl;
+												firstnumber = 0;
+												break;
+											}
+										}
+									}
+								}
+							}
+						}
+						firstnumber = 0;
+					}
 				}
 			}
 		}
@@ -163,8 +169,7 @@ int day3(int argc, char** argv)
 	}
 	else
 	{
-		throw "bro you forgot the input file";
-		std::exit(0);
+		std::cerr << "missing input file.. exiting!" << std::endl;
 	}
 	return 0;
 }
