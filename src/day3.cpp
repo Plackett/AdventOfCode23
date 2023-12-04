@@ -14,7 +14,7 @@ int day3(bool part)
 	int sum = 0;
 	int skip = 0;
 	// importing file
-	std::ifstream input("./src/input/day3input.txt");
+	std::ifstream input("./input/day3input.txt");
 	if (input.is_open())
 	{
 		// loop through all lines and add to the lines map

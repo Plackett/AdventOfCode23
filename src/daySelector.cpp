@@ -50,6 +50,19 @@ int main(int argc, char** argv)
 			break;
 		}
 		break;
+	case '4':
+		switch (input[1])
+		{
+		case '1':
+			std::cout << "Running day 4 part 1..." << std::endl;
+			day4(false);
+			break;
+		case '2':
+			std::cout << "Running day 4 part 2..." << std::endl;
+			day4(true);
+			break;
+		}
+		break;
 	}
 	std::cout << "Press any key to exit." << std::endl;
 	_getch();

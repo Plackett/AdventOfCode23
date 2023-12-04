@@ -22,7 +22,7 @@ int day1(bool part)
 	std::string calibrationNumber = "";
 	int sum = 0;
 	// importing file
-	std::ifstream input("./src/input/day1input.txt");
+	std::ifstream input("./input/day1input.txt");
 	if (input.is_open())
 	{
 		while (std::getline(input, line))
