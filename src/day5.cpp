@@ -8,19 +8,20 @@
 #include <iterator>
 #include "dayLinker.hh"
 
-int main(long argc, char** argv)
+int day5(bool part)
 {
 	std::ifstream input("./input/day5input.txt");
 	std::string line{};
 	std::istringstream test();
-	std::vector<long> seedMap{};
-	std::vector<long> soilMap{};
-	std::vector<long> fertMap{};
-	std::vector<long> waterMap{};
-	std::vector<long> lightMap{};
-	std::vector<long> tempMap{};
-	std::vector<long> humidMap{};
-	std::vector<long> locationMap{};
+	long long startIndex = 0;
+	std::vector<long long> seedMap{};
+	std::vector<long long> soilMap{};
+	std::vector<long long> fertMap{};
+	std::vector<long long> waterMap{};
+	std::vector<long long> lightMap{};
+	std::vector<long long> tempMap{};
+	std::vector<long long> humidMap{};
+	std::vector<long long> locationMap{};
 	bool seed = false;
 	bool soil = false;
 	bool fert = false;
@@ -37,147 +38,170 @@ int main(long argc, char** argv)
 			{
 				for (std::string num : split(split(line, ":")[1], " "))
 				{
-					for (char c : num)
-					{
-						if (!isdigit(c))
-						{
-							std::cout << "FAILED AT " << num << std::endl;
-							return 0;
-						}
-					}
 					remove_if(num.begin(), num.end(), isspace);
-					if (num.length())
+					if (atoll(num.c_str()) != 0)
 					{
-						std::cout << "seed at " << num << std::endl;
-						seedMap.push_back(atol(num.c_str()));
+						if (part == 2)
+						{
+							if (startIndex == 0)
+							{
+								startIndex = atoll(num.c_str());
+							}
+							else
+							{
+								for (long long i = 0; i < atoll(num.c_str()); i++)
+								{
+									std::cout << "seed at " << startIndex + i << std::endl;
+									seedMap.push_back(startIndex + i);
+								}
+								startIndex = 0;
+							}
+						}
+						else if (part == 1)
+						{
+							std::cout << "seed at " << startIndex << std::endl;
+							seedMap.push_back(atoll(num.c_str()));
+						}
 					}
 				}
 			}
 			else if (line.substr(0, 4) == "seed")
 			{
-				soilMap = std::vector<long>(seedMap);
+				std::cout << "MOVED TO SOIL TRANSLATION" << std::endl;
+				soilMap = std::vector<long long>(seedMap);
 				soil = true;
 			}
 			else if (line.substr(0, 4) == "soil")
 			{
+				std::cout << "MOVED TO FERTILIZER TRANSLATION" << std::endl;
 				soil = false;
-				fertMap = std::vector<long>(soilMap);
+				fertMap = std::vector<long long>(soilMap);
 				fert = true;
 			}
 			else if (line.substr(0, 4) == "fert")
 			{
+				std::cout << "MOVED TO WATER TRANSLATION" << std::endl;
 				fert = false;
-				waterMap = std::vector<long>(fertMap);
+				waterMap = std::vector<long long>(fertMap);
 				water = true;
 			}
 			else if (line.substr(0, 4) == "wate")
 			{
+				std::cout << "MOVED TO LIGHT TRANSLATION" << std::endl;
 				water = false;
-				lightMap = std::vector<long>(waterMap);
+				lightMap = std::vector<long long>(waterMap);
 				light = true;
 			}
 			else if (line.substr(0, 4) == "ligh")
 			{
+				std::cout << "MOVED TO TEMPERATURE TRANSLATION" << std::endl;
 				light = false;
-				tempMap = std::vector<long>(lightMap);
+				tempMap = std::vector<long long>(lightMap);
 				temp = true;
 			}
 			else if (line.substr(0, 4) == "temp")
 			{
+				std::cout << "MOVED TO HUMIDITY TRANSLATION" << std::endl;
 				temp = false;
-				humidMap = std::vector<long>(tempMap);
+				humidMap = std::vector<long long>(tempMap);
 				humid = true;
 			}
 			else if (line.substr(0, 4) == "humi")
 			{
+				std::cout << "MOVED TO LOCATION TRANSLATION" << std::endl;
 				humid = false;
-				locationMap = std::vector<long>(humidMap);
+				locationMap = std::vector<long long>(humidMap);
 				location = true;
 			}
 			else
 			{
-				if (line.length() > 1 && isdigit(line[0]))
+				if (line.length() > 1 && (soil || fert || water || light || temp || humid || location))
 				{
+					long long srcIndex = std::atoll(split(line, " ")[1].c_str());
+					long long destIndex = std::atoll(split(line, " ")[0].c_str());
+					long long offset = std::atoll(split(line, " ")[2].c_str());
 					if (soil)
 					{
-						for (long i = std::atol(split(line, " ")[1].c_str()); i < std::atol(split(line, " ")[1].c_str()) + std::atol(split(line, " ")[2].c_str()); i++)
+						for (long long i = 0; i < seedMap.size(); i++)
 						{
-							std::cout << "range entered at " << i << std::endl;
-							if (find(seedMap.begin(), seedMap.end(), i) != seedMap.end())
+							std::cout << "tested " << seedMap[i] << std::endl;
+							if (seedMap[i] < srcIndex + offset  && seedMap[i] >= srcIndex)
 							{
-								std::cout << "replaced " << *find(seedMap.begin(), seedMap.end(), i) << " with " << std::atol(split(line, " ")[0].c_str()) + i - std::atol(split(line, " ")[1].c_str()) << std::endl;
-								soilMap[std::distance(seedMap.begin(),find(seedMap.begin(), seedMap.end(), i))] = std::atol(split(line, " ")[0].c_str()) + i - std::atol(split(line, " ")[1].c_str());
+								std::cout << "replaced " << seedMap[i] << " with " << seedMap[i] - srcIndex + destIndex << std::endl;
+								soilMap[i] = seedMap[i] - srcIndex + destIndex;
 							}
 						}
-					} else if (fert)
+					}
+					else if (fert)
 					{
-						for (long i = std::atol(split(line, " ")[1].c_str()); i < std::atol(split(line, " ")[1].c_str()) + std::atol(split(line, " ")[2].c_str()); i++)
+						for (long long i = 0; i < soilMap.size(); i++)
 						{
-							std::cout << "range entered at " << i << std::endl;
-							if (find(soilMap.begin(), soilMap.end(), i) != soilMap.end())
+							std::cout << "tested " << soilMap[i] << std::endl;
+							if (soilMap[i] < srcIndex + offset  && soilMap[i] >= srcIndex)
 							{
-								std::cout << "replaced " << *find(soilMap.begin(), soilMap.end(), i) << " with " << std::atol(split(line, " ")[0].c_str()) + i - std::atol(split(line, " ")[1].c_str()) << std::endl;
-								fertMap[std::distance(soilMap.begin(), find(soilMap.begin(), soilMap.end(), i))] = std::atol(split(line, " ")[0].c_str()) + i - std::atol(split(line, " ")[1].c_str());
+								std::cout << "replaced " << soilMap[i] << " with " << soilMap[i] - srcIndex + destIndex << std::endl;
+								fertMap[i] = soilMap[i] - srcIndex + destIndex;
 							}
 						}
 					}
 					else if (water)
 					{
-						for (long i = std::atol(split(line, " ")[1].c_str()); i < std::atol(split(line, " ")[1].c_str()) + std::atol(split(line, " ")[2].c_str()); i++)
+						for (long long i = 0; i < fertMap.size(); i++)
 						{
-							std::cout << "range entered at " << i << std::endl;
-							if (find(fertMap.begin(), fertMap.end(), i) != fertMap.end())
+							std::cout << "tested " << fertMap[i] << std::endl;
+							if (fertMap[i] < srcIndex + offset  && fertMap[i] >= srcIndex)
 							{
-								std::cout << "replaced " << *find(fertMap.begin(), fertMap.end(), i) << " with " << std::atol(split(line, " ")[0].c_str()) + i - std::atol(split(line, " ")[1].c_str()) << std::endl;
-								waterMap[std::distance(fertMap.begin(), find(fertMap.begin(), fertMap.end(), i))] = std::atol(split(line, " ")[0].c_str()) + i - std::atol(split(line, " ")[1].c_str());
+								std::cout << fertMap[i] << " was between " << srcIndex << " and " << srcIndex + offset << std::endl;
+								std::cout << "replaced " << fertMap[i] << " with " << fertMap[i] - srcIndex + destIndex << std::endl;
+								waterMap[i] = fertMap[i] - srcIndex + destIndex;
 							}
 						}
 					}
 					else if (light)
 					{
-						for (long i = std::atol(split(line, " ")[1].c_str()); i < std::atol(split(line, " ")[1].c_str()) + std::atol(split(line, " ")[2].c_str()); i++)
+						for (long long i = 0; i < waterMap.size(); i++)
 						{
-							std::cout << "range entered at " << i << std::endl;
-							if (find(waterMap.begin(), waterMap.end(), i) != waterMap.end())
+							std::cout << "tested " << waterMap[i] << std::endl;
+							if (waterMap[i] < srcIndex + offset  && waterMap[i] >= srcIndex)
 							{
-								std::cout << "replaced " << *find(waterMap.begin(), waterMap.end(), i) << " with " << std::atol(split(line, " ")[0].c_str()) + i - std::atol(split(line, " ")[1].c_str()) << std::endl;
-								lightMap[std::distance(waterMap.begin(), find(waterMap.begin(), waterMap.end(), i))] = std::atol(split(line, " ")[0].c_str()) + i - std::atol(split(line, " ")[1].c_str());
+								std::cout << "replaced " << waterMap[i] << " with " << waterMap[i] - srcIndex + destIndex << std::endl;
+								lightMap[i] = waterMap[i] - srcIndex + destIndex;
 							}
 						}
 					}
 					else if (temp)
 					{
-						for (long i = std::atol(split(line, " ")[1].c_str()); i < std::atol(split(line, " ")[1].c_str()) + std::atol(split(line, " ")[2].c_str()); i++)
+						for (long long i = 0; i < lightMap.size(); i++)
 						{
-							std::cout << "range entered at " << i << std::endl;
-							if (find(lightMap.begin(), lightMap.end(), i) != lightMap.end())
+							std::cout << "tested " << lightMap[i] << std::endl;
+							if (lightMap[i] < srcIndex + offset  && lightMap[i] >= srcIndex)
 							{
-								std::cout << "replaced " << *find(lightMap.begin(), lightMap.end(), i) << " with " << std::atol(split(line, " ")[0].c_str()) + i - std::atol(split(line, " ")[1].c_str()) << std::endl;
-								tempMap[std::distance(lightMap.begin(), find(lightMap.begin(), lightMap.end(), i))] = std::atol(split(line, " ")[0].c_str()) + i - std::atol(split(line, " ")[1].c_str());
+								std::cout << "replaced " << lightMap[i] << " with " << lightMap[i] - srcIndex + destIndex << std::endl;
+								tempMap[i] = lightMap[i] - srcIndex + destIndex;
 							}
 						}
 					}
 					else if (humid)
 					{
-						for (long i = std::atol(split(line, " ")[1].c_str()); i < std::atol(split(line, " ")[1].c_str()) + std::atol(split(line, " ")[2].c_str()); i++)
+						for (long long i = 0; i < tempMap.size(); i++)
 						{
-							std::cout << "range entered at " << i << std::endl;
-							if (find(tempMap.begin(), tempMap.end(), i) != tempMap.end())
+							std::cout << "tested " << tempMap[i] << std::endl;
+							if (tempMap[i] < srcIndex + offset && tempMap[i] >= srcIndex)
 							{
-								std::cout << "replaced " << *find(tempMap.begin(), tempMap.end(), i) << " with " << std::atol(split(line, " ")[0].c_str()) + i - std::atol(split(line, " ")[1].c_str()) << std::endl;
-								humidMap[std::distance(tempMap.begin(), find(tempMap.begin(), tempMap.end(), i))] = std::atol(split(line, " ")[0].c_str()) + i - std::atol(split(line, " ")[1].c_str());
+								std::cout << "replaced " << tempMap[i] << " with " << tempMap[i] - srcIndex + destIndex << std::endl;
+								humidMap[i] = tempMap[i] - srcIndex + destIndex;
 							}
 						}
 					}
 					else if (location)
 					{
-						for (long i = std::atol(split(line, " ")[1].c_str()); i < std::atol(split(line, " ")[1].c_str()) + std::atol(split(line, " ")[2].c_str()); i++)
+						for (long long i = 0; i < humidMap.size(); i++)
 						{
-							std::cout << "range entered at " << i << std::endl;
-							if (find(humidMap.begin(), humidMap.end(), i) != humidMap.end())
+							std::cout << "tested " << humidMap[i] << std::endl;
+							if (humidMap[i] < srcIndex + offset  && humidMap[i] >= srcIndex)
 							{
-								std::cout << "replaced " << *find(humidMap.begin(), humidMap.end(), i) << " with " << std::atol(split(line, " ")[0].c_str()) + i - std::atol(split(line, " ")[1].c_str()) << std::endl;
-								locationMap[std::distance(humidMap.begin(), find(humidMap.begin(), humidMap.end(), i))] = std::atol(split(line, " ")[0].c_str()) + i - std::atol(split(line, " ")[1].c_str());
+								std::cout << "replaced " << humidMap[i] << " with " << humidMap[i] - srcIndex + destIndex << std::endl;
+								locationMap[i] = humidMap[i] - srcIndex + destIndex;
 							}
 						}
 					}
@@ -185,7 +209,7 @@ int main(long argc, char** argv)
 			}
 		}
 		std::cout << "seeds soil fert water light temp humid" << std::endl;
-		for (long i = 0; i < seedMap.size(); i++)
+		for (long long i = 0; i < seedMap.size(); i++)
 		{
 			std::cout << seedMap.at(i);
 			std::cout << " " << soilMap.at(i);
@@ -196,6 +220,8 @@ int main(long argc, char** argv)
 			std::cout << " " << humidMap.at(i);
 			std::cout << " " << locationMap.at(i) << std::endl;
 		}
+		auto smallestLocation = std::min_element(locationMap.begin(), locationMap.end());
+		std::cout << "location " << *smallestLocation << "has the smallest location size and started off as seed " << seedMap.at(std::distance(locationMap.begin(),smallestLocation)) << std::endl;
 	}
 	else
 	{
