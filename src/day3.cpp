@@ -5,7 +5,7 @@
 #include <iostream>
 #include "dayLinker.hh"
 
-int day3(bool part)
+int day3(int part)
 {
 	// setting up data storage
 	std::vector<std::string> lines{};
@@ -24,7 +24,7 @@ int day3(bool part)
 		}
 		// check for a non number, non period character in a 3x3 radius around each number
 		// part 1
-		if (!part)
+		if (part == 1)
 		{
 			for (int i = 0; i < lines.size(); ++i)
 			{

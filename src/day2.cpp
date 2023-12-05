@@ -4,7 +4,7 @@
 #include <vector>
 #include "dayLinker.hh"
 
-int day2(bool part)
+int day2(int part)
 {
 	std::ifstream input("./input/day2input.txt");
 	std::string line{};
@@ -70,7 +70,7 @@ int day2(bool part)
 				}
 			}
 			// part one
-			if (!part)
+			if (part == 1)
 			{
 				if (possible)
 				{

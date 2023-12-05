@@ -1,1 +1,2 @@
 C:\Users\johnn\Desktop\aoc23\aoc12_2023\x64\Debug\AdventOfCodeDec2023.exe
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\x64\Debug\AdventOfCodeDec2023.exe

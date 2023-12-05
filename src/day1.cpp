@@ -16,7 +16,7 @@ std::string replaceAllOccurences(std::string in, std::string pattern, std::strin
 	return in;
 }
 
-int day1(bool part)
+int day1(int part)
 {
 	std::string line;
 	std::string calibrationNumber = "";
@@ -28,7 +28,7 @@ int day1(bool part)
 		while (std::getline(input, line))
 		{
 			// part two only
-			if (part == true)
+			if (part == 2)
 			{
 				line = replaceAllOccurences(line, "one", "1");
 				line = replaceAllOccurences(line, "two", "2");

@@ -13,7 +13,7 @@ typedef struct
 	int index, data;
 } Card;
 
-int day4(bool part)
+int day4(int part)
 {
 	std::ifstream input("./input/day4input.txt");
 	std::string line{};
@@ -41,7 +41,7 @@ int day4(bool part)
 				if (std::find(winNums.begin(), winNums.end(), i) != winNums.end() && i != std::string(1, ' ') && i != "")
 				{
 					//std::cout << "DOUBLED WINNINGS " << currentWinnings << std::endl << i << std::endl;
-					if (!part)
+					if (part == 1)
 					{
 						currentWinnings = currentWinnings < 2 ? currentWinnings + 1 : currentWinnings * 2;
 					}
@@ -51,7 +51,7 @@ int day4(bool part)
 					}
 				}
 			}
-			if (!part)
+			if (part == 1)
 			{
 				totalWinnings += currentWinnings;
 			}
@@ -62,7 +62,7 @@ int day4(bool part)
 				std::cout << currentWinnings << " wins at Card: " << winsPerCard.size() << '\n';
 			}
 		}
-		if (part)
+		if (part == 2)
 		{
 			totalWinnings += winsPerCard.size();
 			duplicateCards = std::vector<Card>(winsPerCard);

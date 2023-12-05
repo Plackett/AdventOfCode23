@@ -26,7 +26,9 @@
     <ClCompile Include="src\day2.cpp" />
     <ClCompile Include="src\day3.cpp" />
     <ClCompile Include="src\day4.cpp" />
+    <ClCompile Include="src\day5.cpp" />
     <ClCompile Include="src\daySelector.cpp" />
+    <ClCompile Include="src\unusedDays.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
