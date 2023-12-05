@@ -3,7 +3,7 @@
 #include <regex>
 #include "dayLinker.hh"
 
-int main(int argc, char** argv)
+/*int main(int argc, char** argv)
 {
 begin:
 	std::cout << "please type the number of the day you would like to run, press enter to end your statement." << std::endl;
@@ -124,4 +124,4 @@ begin:
 	default:
 		return 0;
 	}
-}
+}*/

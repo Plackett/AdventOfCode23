@@ -76,11 +76,8 @@ int day4(int part)
 					currentCards = duplicateCards.at(i).data;
 					while (currentCards > 0)
 					{
-						if (duplicateCards.at(i).index + currentCards < winsPerCard.size())
-						{
-							duplicateCards.push_back(winsPerCard.at(duplicateCards.at(i).index + currentCards));
-							totalWinnings++;
-						}
+						duplicateCards.push_back(winsPerCard.at(duplicateCards.at(i).index + currentCards-1));
+						totalWinnings++;
 						currentCards--;
 					}
 				}
