@@ -1,0 +1,4 @@
+﻿  day4.cpp
+  The contents of <string_view> are available only with C++17 or later.
+C:\Users\johnn\Desktop\aoc23\aoc12_2023\src\day4.cpp(67,37): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
+  AdventOfCodeDec2023.vcxproj -> C:\Users\johnn\Desktop\aoc23\aoc12_2023\x64\Debug\AdventOfCodeDec2023.exe

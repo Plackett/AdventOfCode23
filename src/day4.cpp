@@ -5,30 +5,30 @@
 #include <numeric>
 #include <string_view>
 #include <algorithm>
+#include <iterator>
 #include "dayLinker.hh"
 
-struct Card
+typedef struct
 {
-	int index;
-	std::string data;
-public:
-	Card(int i, std::string d) : index(i), data(d) {};
-};
+	int index, data;
+} Card;
 
 int day4(bool part)
 {
 	std::ifstream input("./input/day4input.txt");
 	std::string line{};
 	std::vector<std::string> winNums{};
-	std::vector<std::string> winsPerCard{};
+	std::vector<Card> winsPerCard{};
 	std::vector<Card> duplicateCards{};
 	int totalWinnings = 0;
 	int currentWinnings = 0;
 	int currentCards = 0;
+	int cardIndex = 0;
 	if (input.is_open())
 	{
 		while (std::getline(input, line))
 		{
+			cardIndex++;
 			currentWinnings = 0;
 			winNums = split(split(split(line,":")[1], "|")[0], " ");
 			/*for (std::string win : winNums)
@@ -57,41 +57,28 @@ int day4(bool part)
 			}
 			else
 			{
-				winsPerCard.push_back(std::to_string(currentWinnings));
+				std::cout << "current card: " << cardIndex << '\n';
+				winsPerCard.push_back(Card{ cardIndex, currentWinnings });
 				std::cout << currentWinnings << " wins at Card: " << winsPerCard.size() << '\n';
 			}
 		}
 		if (part)
 		{
 			totalWinnings += winsPerCard.size();
-			for (int i = 0; i < winsPerCard.size(); i++)
-			{
-				std::cout << "running Card:" << i+1 << '\n';
-				currentCards = std::stoi(winsPerCard.at(i));
-				while (currentCards > 0)
-				{
-					if (i + currentCards < winsPerCard.size())
-					{
-						duplicateCards.push_back(Card(i+currentCards,winsPerCard.at(i + currentCards)));
-						totalWinnings++;
-					}
-					currentCards--;
-				}
-			}
-			std::cout << "currentCards before duplicates: " << totalWinnings << '\n';
+			duplicateCards = std::vector<Card>(winsPerCard);
 			int cardsToErase = 0;
 			while (duplicateCards.size() > 0)
 			{
 				for (int i = 0; i < duplicateCards.size(); i++)
 				{
 					cardsToErase++;
-					std::cout << "running Card:" << duplicateCards.at(i).index+1 << '\n';
-					currentCards = std::stoi(duplicateCards.at(i).data);
+					std::cout << "running Card:" << duplicateCards.at(i).index << '\n';
+					currentCards = duplicateCards.at(i).data;
 					while (currentCards > 0)
 					{
 						if (duplicateCards.at(i).index + currentCards < winsPerCard.size())
 						{
-							duplicateCards.push_back(Card(duplicateCards.at(i).index+currentCards, winsPerCard.at(duplicateCards.at(i).index + currentCards)));
+							duplicateCards.push_back(winsPerCard.at(duplicateCards.at(i).index + currentCards));
 							totalWinnings++;
 						}
 						currentCards--;
