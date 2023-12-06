@@ -1,3 +1,4 @@
-﻿  day5.cpp
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.37.32822\include\string_view(13): warning STL4038: The contents of <string_view> are available only with C++17 or later.
+﻿  day6.cpp
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day6.cpp(5,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day6.cpp(69,27): warning C4018: '<': signed/unsigned mismatch
   AdventOfCodeDec2023.vcxproj -> C:\Users\johnn\Desktop\AdventOfCodeDec2023\x64\Debug\AdventOfCodeDec2023.exe

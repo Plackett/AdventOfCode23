@@ -86,5 +86,9 @@ int day4(int part)
 		}
 		std::cout << "total: " << totalWinnings << '\n';
 	}
+	else
+	{
+		std::cerr << "missing input file.. exiting!" << std::endl;
+	}
 	return 0;
 }

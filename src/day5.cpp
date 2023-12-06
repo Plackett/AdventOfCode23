@@ -6,14 +6,19 @@
 #include <string_view>
 #include <algorithm>
 #include <iterator>
+#include <thread>
 #include "dayLinker.hh"
 
-int day5(bool part)
+void addIncreasingNumbers(std::vector<long long> in,long long startIndex, long long length)
+{
+	std::iota(in.begin() + startIndex, in.begin() + length, startIndex);
+}
+
+int day5(int part)
 {
 	std::ifstream input("./input/day5input.txt");
 	std::string line{};
 	std::istringstream test();
-	long long startIndex = 0;
 	std::vector<long long> seedMap{};
 	std::vector<long long> soilMap{};
 	std::vector<long long> fertMap{};
@@ -36,31 +41,25 @@ int day5(bool part)
 		{
 			if (line.substr(0, 5) == "seeds")
 			{
-				for (std::string num : split(split(line, ":")[1], " "))
+				std::vector<std::string> rawSeeds = split(line.substr(6, line.length()), " ");
+				if (part == 1)
 				{
-					remove_if(num.begin(), num.end(), isspace);
-					if (atoll(num.c_str()) != 0)
+					for (long long i = 0; i < rawSeeds.size(); i++)
 					{
-						if (part == 2)
+						seedMap.push_back(std::atoll(rawSeeds[i].c_str()));
+					}
+				}
+				else if (part == 2)
+				{
+					for (long long i = 0; i < rawSeeds.size(); i+2)
+					{
+						if (atoll(rawSeeds[i].c_str()) != 0)
 						{
-							if (startIndex == 0)
-							{
-								startIndex = atoll(num.c_str());
-							}
-							else
-							{
-								for (long long i = 0; i < atoll(num.c_str()); i++)
-								{
-									std::cout << "seed at " << startIndex + i << std::endl;
-									seedMap.push_back(startIndex + i);
-								}
-								startIndex = 0;
-							}
-						}
-						else if (part == 1)
-						{
-							std::cout << "seed at " << startIndex << std::endl;
-							seedMap.push_back(atoll(num.c_str()));
+							int NUM_THREADS = 16;
+							long long totalLength = std::atoll(rawSeeds[i + 1].c_str());
+							std::vector<long long>temp(totalLength);
+							std::iota(std::begin(temp), std::end(temp), atoll(rawSeeds[i].c_str()));
+							seedMap.insert(seedMap.end(), temp.begin(), temp.end());
 						}
 					}
 				}
