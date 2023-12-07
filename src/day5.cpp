@@ -9,9 +9,68 @@
 #include <thread>
 #include "dayLinker.hh"
 
-void addIncreasingNumbers(std::vector<long long> in, long long startIndex, long long length)
+bool rangeCompare(std::pair<long long, long long>& a, std::pair<long long, long long>& b)
 {
-	std::iota(in.begin() + startIndex, in.begin() + length, startIndex);
+	if (a.first == b.first)
+	{
+		return a.second > b.second;
+	}
+	else
+	{
+		return a.first > b.first;
+	}
+}
+
+std::vector<long long> checkNumber(std::vector<long long> inputArray,std::vector<long long> outputArray, long long srcIndex, long long offset, long long destIndex)
+{
+	for (long long i = 0; i < inputArray.size(); i++)
+	{
+		std::cout << "tested " << inputArray[i] << std::endl;
+		if (inputArray[i] < srcIndex + offset && inputArray[i] >= srcIndex)
+		{
+			std::cout << "replaced " << inputArray[i] << " with " << inputArray[i] - srcIndex + destIndex << std::endl;
+			outputArray[i] = inputArray[i] - srcIndex + destIndex;
+		}
+	}
+	return outputArray;
+}
+
+std::vector<std::pair<long long, long long>> checkRange(std::vector<std::pair<long long, long long>> inputRanges, std::vector<std::pair<long long, long long>> outputRanges, long long srcIndex, long long offset, long long destIndex)
+{
+	for (std::pair<long long, long long> range : inputRanges)
+	// check if the beginning of the range is within the range, if it is within then check end to determine if second split is needed
+	{// [======] -> [=] [====] [=]
+		if (inRange(range.first, srcIndex + offset, srcIndex))
+		{
+			std::cout << "FOUND MATCH WITHIN RANGE " << range.first << " and " << range.second << '\n';
+			// range is completely within filter range
+			if (inRange(range.second, srcIndex + offset, srcIndex))
+			{
+				outputRanges.push_back(std::pair<long long, long long>(destIndex + (range.first - srcIndex), destIndex + (srcIndex + offset - range.second)));
+			}
+			// range is within on left, not within on right [====] [==]
+			else
+			{
+				outputRanges.push_back(std::pair<long long, long long>(destIndex + (range.first - srcIndex), destIndex + offset));
+				outputRanges.push_back(std::pair<long long, long long>(srcIndex + offset,range.second));
+			}
+		}
+		else
+		{
+			// range is within on right, not within on left [==] [====]
+			if (inRange(range.second, srcIndex + offset, srcIndex))
+			{
+				outputRanges.push_back(std::pair<long long, long long>(range.first,srcIndex));
+				outputRanges.push_back(std::pair<long long, long long>(destIndex,destIndex + (srcIndex + offset - range.second)));
+			}
+			// range is not within on any values
+			else
+			{
+				outputRanges.push_back(range);
+			}
+		}
+	}
+	return outputRanges;
 }
 
 int day5(int part)
@@ -27,6 +86,14 @@ int day5(int part)
 	std::vector<long long> tempMap{};
 	std::vector<long long> humidMap{};
 	std::vector<long long> locationMap{};
+	std::vector<std::pair<long long,long long>> seedPairs{};
+	std::vector<std::pair<long long, long long>> soilPairs{};
+	std::vector<std::pair<long long, long long>> fertPairs{};
+	std::vector<std::pair<long long, long long>> waterPairs{};
+	std::vector<std::pair<long long, long long>> lightPairs{};
+	std::vector<std::pair<long long, long long>> tempPairs{};
+	std::vector<std::pair<long long, long long>> humidPairs{};
+	std::vector<std::pair<long long, long long>> locationPairs{};
 	bool seed = false;
 	bool soil = false;
 	bool fert = false;
@@ -43,10 +110,9 @@ int day5(int part)
 			{
 				std::vector<std::string> rawSeeds = split(line.substr(6, line.length()), " ");
 				std::vector<long long> numericSeeds{};
-				std::vector<std::pair<long long, long long>> rawPairs{};
 				if (part == 1)
 				{
-					for (long long i = 0; i < rawSeeds.size(); i++)
+					for (long long i = 1; i < rawSeeds.size(); i++)
 					{
 						seedMap.push_back(std::atoll(rawSeeds[i].c_str()));
 					}
@@ -57,7 +123,7 @@ int day5(int part)
 					{
 						if (std::atoll(rawSeeds[i].c_str()) != 0)
 						{
-							rawPairs.push_back(std::pair<long long, long long>(std::atoll(rawSeeds[i].c_str()), std::atoll(rawSeeds[i + 1].c_str())));
+							seedPairs.push_back(std::pair<long long, long long>(std::atoll(rawSeeds[i].c_str()), std::atoll(rawSeeds[i + 1].c_str())));
 						}
 					}
 					/*
@@ -134,108 +200,102 @@ int day5(int part)
 					long long srcIndex = std::atoll(split(line, " ")[1].c_str());
 					long long destIndex = std::atoll(split(line, " ")[0].c_str());
 					long long offset = std::atoll(split(line, " ")[2].c_str());
-					if (soil)
+					if (part == 1)
 					{
-						for (long long i = 0; i < seedMap.size(); i++)
+						if (soil)
 						{
-							std::cout << "tested " << seedMap[i] << std::endl;
-							if (seedMap[i] < srcIndex + offset && seedMap[i] >= srcIndex)
-							{
-								std::cout << "replaced " << seedMap[i] << " with " << seedMap[i] - srcIndex + destIndex << std::endl;
-								soilMap[i] = seedMap[i] - srcIndex + destIndex;
-							}
+							soilMap = checkNumber(seedMap, soilMap, srcIndex, offset, destIndex);
+						}
+						else if (fert)
+						{
+							fertMap = checkNumber(soilMap, fertMap, srcIndex, offset, destIndex);
+						}
+						else if (water)
+						{
+							waterMap = checkNumber(fertMap, waterMap, srcIndex, offset, destIndex);
+						}
+						else if (light)
+						{
+							lightMap = checkNumber(waterMap, lightMap, srcIndex, offset, destIndex);
+						}
+						else if (temp)
+						{
+							tempMap = checkNumber(lightMap, tempMap, srcIndex, offset, destIndex);
+						}
+						else if (humid)
+						{
+							humidMap = checkNumber(tempMap, humidMap, srcIndex, offset, destIndex);
+						}
+						else if (location)
+						{
+							locationMap = checkNumber(humidMap, locationMap, srcIndex, offset, destIndex);
 						}
 					}
-					else if (fert)
+					else
 					{
-						for (long long i = 0; i < soilMap.size(); i++)
+						if (soil)
 						{
-							std::cout << "tested " << soilMap[i] << std::endl;
-							if (soilMap[i] < srcIndex + offset && soilMap[i] >= srcIndex)
-							{
-								std::cout << "replaced " << soilMap[i] << " with " << soilMap[i] - srcIndex + destIndex << std::endl;
-								fertMap[i] = soilMap[i] - srcIndex + destIndex;
-							}
+							soilPairs = checkRange(seedPairs, soilPairs, srcIndex, offset, destIndex);
+						}
+						else if (fert)
+						{
+							fertPairs = checkRange(soilPairs, fertPairs, srcIndex, offset, destIndex);
+						}
+						else if (water)
+						{
+							waterPairs = checkRange(fertPairs, waterPairs, srcIndex, offset, destIndex);
+						}
+						else if (light)
+						{
+							lightPairs = checkRange(waterPairs, lightPairs, srcIndex, offset, destIndex);
+						}
+						else if (temp)
+						{
+							tempPairs = checkRange(lightPairs, tempPairs, srcIndex, offset, destIndex);
+						}
+						else if (humid)
+						{
+							humidPairs = checkRange(tempPairs, humidPairs, srcIndex, offset, destIndex);
+						}
+						else if (location)
+						{
+							locationPairs = checkRange(humidPairs, locationPairs, srcIndex, offset, destIndex);
 						}
 					}
-					else if (water)
-					{
-						for (long long i = 0; i < fertMap.size(); i++)
-						{
-							std::cout << "tested " << fertMap[i] << std::endl;
-							if (fertMap[i] < srcIndex + offset && fertMap[i] >= srcIndex)
-							{
-								std::cout << fertMap[i] << " was between " << srcIndex << " and " << srcIndex + offset << std::endl;
-								std::cout << "replaced " << fertMap[i] << " with " << fertMap[i] - srcIndex + destIndex << std::endl;
-								waterMap[i] = fertMap[i] - srcIndex + destIndex;
-							}
-						}
-					}
-					else if (light)
-					{
-						for (long long i = 0; i < waterMap.size(); i++)
-						{
-							std::cout << "tested " << waterMap[i] << std::endl;
-							if (waterMap[i] < srcIndex + offset && waterMap[i] >= srcIndex)
-							{
-								std::cout << "replaced " << waterMap[i] << " with " << waterMap[i] - srcIndex + destIndex << std::endl;
-								lightMap[i] = waterMap[i] - srcIndex + destIndex;
-							}
-						}
-					}
-					else if (temp)
-					{
-						for (long long i = 0; i < lightMap.size(); i++)
-						{
-							std::cout << "tested " << lightMap[i] << std::endl;
-							if (lightMap[i] < srcIndex + offset && lightMap[i] >= srcIndex)
-							{
-								std::cout << "replaced " << lightMap[i] << " with " << lightMap[i] - srcIndex + destIndex << std::endl;
-								tempMap[i] = lightMap[i] - srcIndex + destIndex;
-							}
-						}
-					}
-					else if (humid)
-					{
-						for (long long i = 0; i < tempMap.size(); i++)
-						{
-							std::cout << "tested " << tempMap[i] << std::endl;
-							if (tempMap[i] < srcIndex + offset && tempMap[i] >= srcIndex)
-							{
-								std::cout << "replaced " << tempMap[i] << " with " << tempMap[i] - srcIndex + destIndex << std::endl;
-								humidMap[i] = tempMap[i] - srcIndex + destIndex;
-							}
-						}
-					}
-					else if (location)
-					{
-						for (long long i = 0; i < humidMap.size(); i++)
-						{
-							std::cout << "tested " << humidMap[i] << std::endl;
-							if (humidMap[i] < srcIndex + offset && humidMap[i] >= srcIndex)
-							{
-								std::cout << "replaced " << humidMap[i] << " with " << humidMap[i] - srcIndex + destIndex << std::endl;
-								locationMap[i] = humidMap[i] - srcIndex + destIndex;
-							}
-						}
-					}
+				
 				}
 			}
 		}
-		std::cout << "seeds soil fert water light temp humid" << std::endl;
-		for (long long i = 0; i < seedMap.size(); i++)
+		if (part == 1)
 		{
-			std::cout << seedMap.at(i);
-			std::cout << " " << soilMap.at(i);
-			std::cout << " " << fertMap.at(i);
-			std::cout << " " << waterMap.at(i);
-			std::cout << " " << lightMap.at(i);
-			std::cout << " " << tempMap.at(i);
-			std::cout << " " << humidMap.at(i);
-			std::cout << " " << locationMap.at(i) << std::endl;
+			std::cout << "seeds soil fert water light temp humid" << std::endl;
+			for (long long i = 0; i < seedMap.size(); i++)
+			{
+				std::cout << seedMap.at(i);
+				std::cout << " " << soilMap.at(i);
+				std::cout << " " << fertMap.at(i);
+				std::cout << " " << waterMap.at(i);
+				std::cout << " " << lightMap.at(i);
+				std::cout << " " << tempMap.at(i);
+				std::cout << " " << humidMap.at(i);
+				std::cout << " " << locationMap.at(i) << std::endl;
+			}
+			auto smallestLocation = std::min_element(locationMap.begin(), locationMap.end());
+			std::cout << "location " << *smallestLocation << "has the smallest location size and started off as seed " << seedMap.at(std::distance(locationMap.begin(), smallestLocation)) << std::endl;
 		}
-		auto smallestLocation = std::min_element(locationMap.begin(), locationMap.end());
-		std::cout << "location " << *smallestLocation << "has the smallest location size and started off as seed " << seedMap.at(std::distance(locationMap.begin(), smallestLocation)) << std::endl;
+		else
+		{
+			std::sort(locationPairs.begin(), locationPairs.end(), rangeCompare);
+			for (std::pair<long long,long long> pair: locationPairs)
+			{
+				std::cout << "location starts at " << pair.first << " ends at " << pair.second << std::endl;
+			}
+			std::sort(soilPairs.begin(), soilPairs.end(), rangeCompare);
+			for (std::pair<long long, long long> pair : soilPairs)
+			{
+				std::cout << "soil starts at " << pair.first << " ends at " << pair.second << std::endl;
+			}
+		}
 	}
 	else
 	{
