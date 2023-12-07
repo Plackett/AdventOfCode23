@@ -1,4 +1,14 @@
-﻿  day6.cpp
-C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day6.cpp(5,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day6.cpp(69,27): warning C4018: '<': signed/unsigned mismatch
+﻿  day5.cpp
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day5.cpp(49,30): warning C4018: '<': signed/unsigned mismatch
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day5.cpp(56,30): warning C4018: '<': signed/unsigned mismatch
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day5.cpp(63,30): warning C4018: '<': signed/unsigned mismatch
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day5.cpp(148,31): warning C4018: '<': signed/unsigned mismatch
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day5.cpp(160,31): warning C4018: '<': signed/unsigned mismatch
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day5.cpp(172,31): warning C4018: '<': signed/unsigned mismatch
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day5.cpp(185,31): warning C4018: '<': signed/unsigned mismatch
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day5.cpp(197,31): warning C4018: '<': signed/unsigned mismatch
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day5.cpp(209,31): warning C4018: '<': signed/unsigned mismatch
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day5.cpp(221,31): warning C4018: '<': signed/unsigned mismatch
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day5.cpp(235,27): warning C4018: '<': signed/unsigned mismatch
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day5.cpp(21,21): warning C4930: 'std::istringstream test(void)': prototyped function not called (was a variable definition intended?)
   AdventOfCodeDec2023.vcxproj -> C:\Users\johnn\Desktop\AdventOfCodeDec2023\x64\Debug\AdventOfCodeDec2023.exe

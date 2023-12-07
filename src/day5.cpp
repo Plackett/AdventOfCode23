@@ -9,7 +9,7 @@
 #include <thread>
 #include "dayLinker.hh"
 
-void addIncreasingNumbers(std::vector<long long> in,long long startIndex, long long length)
+void addIncreasingNumbers(std::vector<long long> in, long long startIndex, long long length)
 {
 	std::iota(in.begin() + startIndex, in.begin() + length, startIndex);
 }
@@ -42,6 +42,8 @@ int day5(int part)
 			if (line.substr(0, 5) == "seeds")
 			{
 				std::vector<std::string> rawSeeds = split(line.substr(6, line.length()), " ");
+				std::vector<long long> numericSeeds{};
+				std::vector<std::pair<long long, long long>> rawPairs{};
 				if (part == 1)
 				{
 					for (long long i = 0; i < rawSeeds.size(); i++)
@@ -51,17 +53,30 @@ int day5(int part)
 				}
 				else if (part == 2)
 				{
-					for (long long i = 0; i < rawSeeds.size(); i+2)
+					for (long long i = 1; i < rawSeeds.size(); i = i + 2)
 					{
-						if (atoll(rawSeeds[i].c_str()) != 0)
+						if (std::atoll(rawSeeds[i].c_str()) != 0)
 						{
-							int NUM_THREADS = 16;
-							long long totalLength = std::atoll(rawSeeds[i + 1].c_str());
-							std::vector<long long>temp(totalLength);
-							std::iota(std::begin(temp), std::end(temp), atoll(rawSeeds[i].c_str()));
-							seedMap.insert(seedMap.end(), temp.begin(), temp.end());
+							rawPairs.push_back(std::pair<long long, long long>(std::atoll(rawSeeds[i].c_str()), std::atoll(rawSeeds[i + 1].c_str())));
 						}
 					}
+					/*
+					std::thread _x[10]{
+						std::thread(addIncreasingNumbers, rawSeeds,rawPairs[0].first,rawPairs[0].second),
+						std::thread(addIncreasingNumbers, rawSeeds,rawPairs[1].first,rawPairs[1].second),
+						std::thread(addIncreasingNumbers, rawSeeds,rawPairs[2].first,rawPairs[2].second),
+						std::thread(addIncreasingNumbers, rawSeeds,rawPairs[3].first,rawPairs[3].second),
+						std::thread(addIncreasingNumbers, rawSeeds,rawPairs[4].first,rawPairs[4].second),
+						std::thread(addIncreasingNumbers, rawSeeds,rawPairs[5].first,rawPairs[5].second),
+						std::thread(addIncreasingNumbers, rawSeeds,rawPairs[6].first,rawPairs[6].second),
+						std::thread(addIncreasingNumbers, rawSeeds,rawPairs[7].first,rawPairs[7].second),
+						std::thread(addIncreasingNumbers, rawSeeds,rawPairs[8].first,rawPairs[8].second),
+						std::thread(addIncreasingNumbers, rawSeeds,rawPairs[9].first,rawPairs[9].second),
+					};
+					for (size_t i = 0; i < 10; ++i)
+					{
+						_x[i].join();
+					}*/
 				}
 			}
 			else if (line.substr(0, 4) == "seed")
@@ -124,7 +139,7 @@ int day5(int part)
 						for (long long i = 0; i < seedMap.size(); i++)
 						{
 							std::cout << "tested " << seedMap[i] << std::endl;
-							if (seedMap[i] < srcIndex + offset  && seedMap[i] >= srcIndex)
+							if (seedMap[i] < srcIndex + offset && seedMap[i] >= srcIndex)
 							{
 								std::cout << "replaced " << seedMap[i] << " with " << seedMap[i] - srcIndex + destIndex << std::endl;
 								soilMap[i] = seedMap[i] - srcIndex + destIndex;
@@ -136,7 +151,7 @@ int day5(int part)
 						for (long long i = 0; i < soilMap.size(); i++)
 						{
 							std::cout << "tested " << soilMap[i] << std::endl;
-							if (soilMap[i] < srcIndex + offset  && soilMap[i] >= srcIndex)
+							if (soilMap[i] < srcIndex + offset && soilMap[i] >= srcIndex)
 							{
 								std::cout << "replaced " << soilMap[i] << " with " << soilMap[i] - srcIndex + destIndex << std::endl;
 								fertMap[i] = soilMap[i] - srcIndex + destIndex;
@@ -148,7 +163,7 @@ int day5(int part)
 						for (long long i = 0; i < fertMap.size(); i++)
 						{
 							std::cout << "tested " << fertMap[i] << std::endl;
-							if (fertMap[i] < srcIndex + offset  && fertMap[i] >= srcIndex)
+							if (fertMap[i] < srcIndex + offset && fertMap[i] >= srcIndex)
 							{
 								std::cout << fertMap[i] << " was between " << srcIndex << " and " << srcIndex + offset << std::endl;
 								std::cout << "replaced " << fertMap[i] << " with " << fertMap[i] - srcIndex + destIndex << std::endl;
@@ -161,7 +176,7 @@ int day5(int part)
 						for (long long i = 0; i < waterMap.size(); i++)
 						{
 							std::cout << "tested " << waterMap[i] << std::endl;
-							if (waterMap[i] < srcIndex + offset  && waterMap[i] >= srcIndex)
+							if (waterMap[i] < srcIndex + offset && waterMap[i] >= srcIndex)
 							{
 								std::cout << "replaced " << waterMap[i] << " with " << waterMap[i] - srcIndex + destIndex << std::endl;
 								lightMap[i] = waterMap[i] - srcIndex + destIndex;
@@ -173,7 +188,7 @@ int day5(int part)
 						for (long long i = 0; i < lightMap.size(); i++)
 						{
 							std::cout << "tested " << lightMap[i] << std::endl;
-							if (lightMap[i] < srcIndex + offset  && lightMap[i] >= srcIndex)
+							if (lightMap[i] < srcIndex + offset && lightMap[i] >= srcIndex)
 							{
 								std::cout << "replaced " << lightMap[i] << " with " << lightMap[i] - srcIndex + destIndex << std::endl;
 								tempMap[i] = lightMap[i] - srcIndex + destIndex;
@@ -197,7 +212,7 @@ int day5(int part)
 						for (long long i = 0; i < humidMap.size(); i++)
 						{
 							std::cout << "tested " << humidMap[i] << std::endl;
-							if (humidMap[i] < srcIndex + offset  && humidMap[i] >= srcIndex)
+							if (humidMap[i] < srcIndex + offset && humidMap[i] >= srcIndex)
 							{
 								std::cout << "replaced " << humidMap[i] << " with " << humidMap[i] - srcIndex + destIndex << std::endl;
 								locationMap[i] = humidMap[i] - srcIndex + destIndex;
@@ -220,7 +235,7 @@ int day5(int part)
 			std::cout << " " << locationMap.at(i) << std::endl;
 		}
 		auto smallestLocation = std::min_element(locationMap.begin(), locationMap.end());
-		std::cout << "location " << *smallestLocation << "has the smallest location size and started off as seed " << seedMap.at(std::distance(locationMap.begin(),smallestLocation)) << std::endl;
+		std::cout << "location " << *smallestLocation << "has the smallest location size and started off as seed " << seedMap.at(std::distance(locationMap.begin(), smallestLocation)) << std::endl;
 	}
 	else
 	{
