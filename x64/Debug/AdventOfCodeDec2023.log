@@ -1,14 +1,139 @@
-﻿  day5.cpp
-C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day5.cpp(49,30): warning C4018: '<': signed/unsigned mismatch
-C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day5.cpp(56,30): warning C4018: '<': signed/unsigned mismatch
-C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day5.cpp(63,30): warning C4018: '<': signed/unsigned mismatch
-C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day5.cpp(148,31): warning C4018: '<': signed/unsigned mismatch
-C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day5.cpp(160,31): warning C4018: '<': signed/unsigned mismatch
-C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day5.cpp(172,31): warning C4018: '<': signed/unsigned mismatch
-C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day5.cpp(185,31): warning C4018: '<': signed/unsigned mismatch
-C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day5.cpp(197,31): warning C4018: '<': signed/unsigned mismatch
-C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day5.cpp(209,31): warning C4018: '<': signed/unsigned mismatch
-C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day5.cpp(221,31): warning C4018: '<': signed/unsigned mismatch
-C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day5.cpp(235,27): warning C4018: '<': signed/unsigned mismatch
-C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day5.cpp(21,21): warning C4930: 'std::istringstream test(void)': prototyped function not called (was a variable definition intended?)
+﻿  day1.cpp
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\dayLinker.hh(32,8): warning C4244: 'initializing': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=__int64
+          ]
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\dayLinker.hh(30,17): warning C4244: 'return': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=__int64
+          ]
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day1.cpp(54,15): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  day2.cpp
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\dayLinker.hh(32,8): warning C4244: 'initializing': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=__int64
+          ]
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\dayLinker.hh(30,17): warning C4244: 'return': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=__int64
+          ]
+  day3.cpp
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\dayLinker.hh(32,8): warning C4244: 'initializing': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=__int64
+          ]
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\dayLinker.hh(30,17): warning C4244: 'return': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=__int64
+          ]
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day3.cpp(119,37): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day3.cpp(145,37): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  day4.cpp
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\dayLinker.hh(32,8): warning C4244: 'initializing': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=__int64
+          ]
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\dayLinker.hh(30,17): warning C4244: 'return': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=__int64
+          ]
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day4.cpp(67,37): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
+  day5.cpp
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\dayLinker.hh(32,8): warning C4244: 'initializing': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=__int64
+          ]
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\dayLinker.hh(30,17): warning C4244: 'return': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=__int64
+          ]
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day5.cpp(26,26): warning C4018: '<': signed/unsigned mismatch
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day5.cpp(115,30): warning C4018: '<': signed/unsigned mismatch
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day5.cpp(122,30): warning C4018: '<': signed/unsigned mismatch
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day5.cpp(272,28): warning C4018: '<': signed/unsigned mismatch
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day5.cpp(80,21): warning C4930: 'std::istringstream test(void)': prototyped function not called (was a variable definition intended?)
+  day6.cpp
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day6.cpp(6,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\dayLinker.hh(32,8): warning C4244: 'initializing': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=__int64
+          ]
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\dayLinker.hh(30,17): warning C4244: 'return': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=__int64
+          ]
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day6.cpp(70,27): warning C4018: '<': signed/unsigned mismatch
+  day7.cpp
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\dayLinker.hh(32,8): warning C4244: 'initializing': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=__int64
+          ]
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\dayLinker.hh(30,17): warning C4244: 'return': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=__int64
+          ]
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day7.cpp(245,26): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
+  day8.cpp
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\dayLinker.hh(32,8): warning C4244: 'initializing': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=__int64
+          ]
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\dayLinker.hh(30,17): warning C4244: 'return': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=__int64
+          ]
+  daySelector.cpp
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\dayLinker.hh(32,8): warning C4244: 'initializing': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=__int64
+          ]
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\dayLinker.hh(30,17): warning C4244: 'return': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=__int64
+          ]
+  dayTemplate.cpp
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\dayLinker.hh(32,8): warning C4244: 'initializing': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=__int64
+          ]
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\dayLinker.hh(30,17): warning C4244: 'return': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=__int64
+          ]
+  unusedDays.cpp
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\unusedDays.cpp(1,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\dayLinker.hh(32,8): warning C4244: 'initializing': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=__int64
+          ]
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\dayLinker.hh(30,17): warning C4244: 'return': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=__int64
+          ]
+  Generating Code...
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day7.cpp(143): warning C4715: 'getStrength': not all control paths return a value
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day7.cpp(189): warning C4715: 'getStrengthPart2': not all control paths return a value
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day7.cpp(97): warning C4715: 'getType': not all control paths return a value
   AdventOfCodeDec2023.vcxproj -> C:\Users\johnn\Desktop\AdventOfCodeDec2023\x64\Debug\AdventOfCodeDec2023.exe

@@ -22,14 +22,16 @@
     <ClInclude Include="src\dayLinker.hh" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="day7.cpp" />
     <ClCompile Include="src\day1.cpp" />
     <ClCompile Include="src\day2.cpp" />
     <ClCompile Include="src\day3.cpp" />
     <ClCompile Include="src\day4.cpp" />
     <ClCompile Include="src\day5.cpp" />
     <ClCompile Include="src\day6.cpp" />
+    <ClCompile Include="src\day7.cpp" />
+    <ClCompile Include="src\day8.cpp" />
     <ClCompile Include="src\daySelector.cpp" />
+    <ClCompile Include="src\dayTemplate.cpp" />
     <ClCompile Include="src\unusedDays.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

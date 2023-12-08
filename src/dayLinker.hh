@@ -6,6 +6,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <numeric>
 // for string delimiter
 inline std::vector<std::string> split(std::string s, std::string delimiter) {
 	size_t pos_start = 0, pos_end, delim_len = delimiter.length();
@@ -21,6 +22,22 @@ inline std::vector<std::string> split(std::string s, std::string delimiter) {
 	res.push_back(s.substr(pos_start));
 	return res;
 }
+
+//recursive implementation
+inline int LcmOfArray(std::vector<int> arr, int idx) {
+	if (idx == arr.size() - 1) {
+		return arr[idx];
+	}
+	int a = arr[idx];
+	int b = LcmOfArray(arr, idx + 1);
+	return std::lcm(a, b);
+}
+
+template <typename val_T>
+inline bool inRange(val_T x, val_T maxx, val_T minx) {
+	return x < maxx && x > minx;
+}
+
 int day1(int part);
 int day2(int part);
 int day3(int part);

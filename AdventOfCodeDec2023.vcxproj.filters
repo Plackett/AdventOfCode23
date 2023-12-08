@@ -39,7 +39,13 @@
     <ClCompile Include="src\day6.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="day7.cpp">
+    <ClCompile Include="src\day7.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\day8.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\dayTemplate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
