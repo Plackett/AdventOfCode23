@@ -36,7 +36,7 @@ int day8(int part)
 					ghostStarts.push_back(line.substr(0, 3));
 				}
 				nodes.emplace(line.substr(0, 3),Node{ line.substr(0,3),line.substr(7,3),line.substr(12,3) });
-				std::cout << "node of " << line.substr(0, 3) << " with left of " << nodes[line.substr(0, 3)].left << '\n';
+				//std::cout << "node of " << line.substr(0, 3) << " with left of " << nodes[line.substr(0, 3)].left << '\n';
 			}
 		}
 		std::string currentNode = "AAA";
@@ -50,7 +50,7 @@ int day8(int part)
 				switch (moves[currentMove])
 				{
 				case 'L':
-					std::cout << "moves to new node " << nodes[currentNode].left << " because of node " << currentNode << '\n';
+					//std::cout << "moves to new node " << nodes[currentNode].left << " because of node " << currentNode << '\n';
 					currentNode = nodes[currentNode].left;
 					break;
 				case 'R':
@@ -65,7 +65,7 @@ int day8(int part)
 		}
 		else
 		{
-			std::vector<int> totalSteps;
+			std::vector<size_t> totalSteps;
 			totalSteps = {};
 			for (size_t i = 0; i < ghostStarts.size(); i++)
 			{
@@ -89,10 +89,10 @@ int day8(int part)
 					if (currentMove >= moves.length())
 						currentMove = 0;
 				}
-				std::cout << "ghost got to Z in " << steps << " steps!" << '\n';
+				//std::cout << "ghost got to Z in " << steps << " steps!" << '\n';
 				totalSteps.push_back(steps);
 			}
-			long totalLCM = LcmOfArray(totalSteps,0);
+			size_t totalLCM = std::accumulate(totalSteps.begin(), totalSteps.end(), size_t{ 1 }, [](size_t a, size_t b) { return std::lcm(a, b); });
 			std::cout << "all ghosts get to Z by " << totalLCM << " steps" << '\n';
 		}
 	}

@@ -23,16 +23,6 @@ inline std::vector<std::string> split(std::string s, std::string delimiter) {
 	return res;
 }
 
-//recursive implementation
-inline int LcmOfArray(std::vector<int> arr, int idx) {
-	if (idx == arr.size() - 1) {
-		return arr[idx];
-	}
-	int a = arr[idx];
-	int b = LcmOfArray(arr, idx + 1);
-	return std::lcm(a, b);
-}
-
 template <typename val_T>
 inline bool inRange(val_T x, val_T maxx, val_T minx) {
 	return x < maxx && x > minx;

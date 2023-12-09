@@ -3,7 +3,6 @@
 
 int noDay() { std::cout << "Solution not yet available. Sorry!" << '\n'; return 0; }
 
-int day9(int part) { return noDay(); }
 int day10(int part) { return noDay(); }
 int day11(int part) { return noDay(); }
 int day12(int part) { return noDay(); }
