@@ -147,48 +147,48 @@ int day5(int part)
 			}
 			else if (line.substr(0, 4) == "seed")
 			{
-				std::cout << "MOVED TO SOIL TRANSLATION" << std::endl;
+				//std::cout << "MOVED TO SOIL TRANSLATION" << std::endl;
 				soilMap = std::vector<long long>(seedMap);
 				soil = true;
 			}
 			else if (line.substr(0, 4) == "soil")
 			{
-				std::cout << "MOVED TO FERTILIZER TRANSLATION" << std::endl;
+				//std::cout << "MOVED TO FERTILIZER TRANSLATION" << std::endl;
 				soil = false;
 				fertMap = std::vector<long long>(soilMap);
 				fert = true;
 			}
 			else if (line.substr(0, 4) == "fert")
 			{
-				std::cout << "MOVED TO WATER TRANSLATION" << std::endl;
+				//std::cout << "MOVED TO WATER TRANSLATION" << std::endl;
 				fert = false;
 				waterMap = std::vector<long long>(fertMap);
 				water = true;
 			}
 			else if (line.substr(0, 4) == "wate")
 			{
-				std::cout << "MOVED TO LIGHT TRANSLATION" << std::endl;
+				//std::cout << "MOVED TO LIGHT TRANSLATION" << std::endl;
 				water = false;
 				lightMap = std::vector<long long>(waterMap);
 				light = true;
 			}
 			else if (line.substr(0, 4) == "ligh")
 			{
-				std::cout << "MOVED TO TEMPERATURE TRANSLATION" << std::endl;
+				//std::cout << "MOVED TO TEMPERATURE TRANSLATION" << std::endl;
 				light = false;
 				tempMap = std::vector<long long>(lightMap);
 				temp = true;
 			}
 			else if (line.substr(0, 4) == "temp")
 			{
-				std::cout << "MOVED TO HUMIDITY TRANSLATION" << std::endl;
+				//std::cout << "MOVED TO HUMIDITY TRANSLATION" << std::endl;
 				temp = false;
 				humidMap = std::vector<long long>(tempMap);
 				humid = true;
 			}
 			else if (line.substr(0, 4) == "humi")
 			{
-				std::cout << "MOVED TO LOCATION TRANSLATION" << std::endl;
+				//std::cout << "MOVED TO LOCATION TRANSLATION" << std::endl;
 				humid = false;
 				locationMap = std::vector<long long>(humidMap);
 				location = true;
@@ -268,7 +268,7 @@ int day5(int part)
 		}
 		if (part == 1)
 		{
-			std::cout << "seeds soil fert water light temp humid" << std::endl;
+			/*std::cout << "seeds soil fert water light temp humid" << std::endl;
 			for (long long i = 0; i < seedMap.size(); i++)
 			{
 				std::cout << seedMap.at(i);
@@ -279,7 +279,7 @@ int day5(int part)
 				std::cout << " " << tempMap.at(i);
 				std::cout << " " << humidMap.at(i);
 				std::cout << " " << locationMap.at(i) << std::endl;
-			}
+			}*/
 			auto smallestLocation = std::min_element(locationMap.begin(), locationMap.end());
 			std::cout << "location " << *smallestLocation << "has the smallest location size and started off as seed " << seedMap.at(std::distance(locationMap.begin(), smallestLocation)) << std::endl;
 		}

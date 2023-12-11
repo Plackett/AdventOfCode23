@@ -74,7 +74,7 @@ int day2(int part)
 			{
 				if (possible)
 				{
-					std::cout << "this line works! " << line << std::endl;
+					//std::cout << "this line works! " << line << std::endl;
 					numSuccess += std::stoi(split(split(line, ": ")[0], " ")[1]);
 				}
 			}

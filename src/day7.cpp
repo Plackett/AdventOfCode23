@@ -92,7 +92,7 @@ int getType(std::string oldHand, int part)
 		break;
 	case 5:
 		return 6;
-			break;
+		break;
 	}
 }
 
@@ -190,6 +190,7 @@ int getStrengthPart2(char input)
 
 bool sortByCond(const Card& a, const Card& b)
 {
+	std::cout << a.hand << " " << b.hand << '\n';
 	if (a.type == b.type)
 	{
 		for (size_t i = 0; i < 5; ++i)
@@ -241,7 +242,7 @@ int day7(int part)
 		int total = 0;
 		for (int i = 0; i < cards.size(); i++)
 		{
-			std::cout << "{ hand: \'" << cards[i].hand << "\', bid: \'" << cards[i].bid << "\', power: " << cards[i].type << " }" << '\n';
+			//std::cout << "{ hand: \'" << cards[i].hand << "\', bid: \'" << cards[i].bid << "\', power: " << cards[i].type << " }" << '\n';
 			total += cards[i].bid * (cards.size() - i);
 		}
 		std::cout << "total winings= " << total << '\n';

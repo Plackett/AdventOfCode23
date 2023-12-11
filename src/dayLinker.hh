@@ -28,6 +28,16 @@ inline bool inRange(val_T x, val_T maxx, val_T minx) {
 	return x < maxx && x > minx;
 }
 
+struct vec2
+{
+	long long x, y;
+};
+
+inline bool operator==(const vec2& v1, const vec2& v2)
+{
+	return v1.x == v2.x && v1.y == v2.y;
+}
+
 int day1(int part);
 int day2(int part);
 int day3(int part);

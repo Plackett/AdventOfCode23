@@ -8,7 +8,7 @@ int main(int argc, char** argv)
 {
 begin:
 	clock_t tStart = clock();
-	std::cout << "please type the number of the day you would like to run, press enter to end your statement." << std::endl;
+	std::cout << "please type the number of the day you would like to run, press enter to end your statement. Alternatively type 0 to run all days." << std::endl;
 	std::string input{};
 	std::cin >> input;
 	for (char c : input)
@@ -20,7 +20,7 @@ begin:
 			goto begin;
 		}
 	}
-	while (std::stoi(input) > 25 || std::stoi(input) < 1)
+	while (std::stoi(input) > 25 || std::stoi(input) < 0)
 	{
 		std::cout << "number not in range, try again. (input must be between 1 and 25)" << std::endl;
 		std::string input{};
@@ -38,10 +38,62 @@ begin:
 		std::cout << "number not in range, please type either a 1 for part 1 or a 2 for part 2." << std::endl;
 		input[input.length() - 1] = _getch();
 	}
-	int part = std::stoi(input.substr(1, input.length() - 1));
+	int part = std::stoi(std::string(1, input[input.length() - 1]));
 	std::cout << "Running day " << input.substr(0,input.length() - 1) << " part " << part << "..." << std::endl;
 	switch (std::stoi(input.substr(0, input.length() - 1)))
 	{
+	case 0:
+		tStart = clock();
+		day1(part);
+		tStart = clock();
+		day2(part);
+		tStart = clock();
+		day3(part);
+		tStart = clock();
+		day4(part);
+		tStart = clock();
+		day5(part);
+		tStart = clock();
+		day6(part);
+		tStart = clock();
+		day7(part);
+		tStart = clock();
+		day8(part);
+		tStart = clock();
+		day9(part);
+		tStart = clock();
+		day10(part);
+		tStart = clock();
+		day11(part);
+		tStart = clock();
+		day12(part);
+		tStart = clock();
+		day13(part);
+		tStart = clock();
+		day14(part);
+		tStart = clock();
+		day15(part);
+		tStart = clock();
+		day16(part);
+		tStart = clock();
+		day17(part);
+		tStart = clock();
+		day18(part);
+		tStart = clock();
+		day19(part);
+		tStart = clock();
+		day20(part);
+		tStart = clock();
+		day21(part);
+		tStart = clock();
+		day22(part);
+		tStart = clock();
+		day23(part);
+		tStart = clock();
+		day24(part);
+		tStart = clock();
+		day25(part);
+		break;
 	case 1:
 		tStart = clock();
 		day1(part);
@@ -67,7 +119,6 @@ begin:
 		day6(part);
 		break;
 	case 7:
-		tStart = clock();
 		day7(part);
 		break;
 	case 8:

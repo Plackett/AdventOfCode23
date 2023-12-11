@@ -1,3 +1,2 @@
-﻿  day9.cpp
-C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day9.cpp(55,26): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
+﻿  daySelector.cpp
   AdventOfCodeDec2023.vcxproj -> C:\Users\johnn\Desktop\AdventOfCodeDec2023\x64\Debug\AdventOfCodeDec2023.exe

@@ -33,7 +33,7 @@ int day6(int part)
 						line.erase(remove_if(line.begin(), line.end(), isspace), line.end());
 						if (num.length() > 0)
 						{
-							std::cout << num << '\n';
+							//std::cout << num << '\n';
 							times.push_back(std::atoll(num.c_str()));
 						}
 					}
@@ -41,7 +41,7 @@ int day6(int part)
 				else
 				{
 					line.erase(remove_if(line.begin(), line.end(), isspace),line.end());
-					std::cout << line.substr(5,line.length()-5) << '\n';
+					//std::cout << line.substr(5,line.length()-5) << '\n';
 					times.push_back(std::atoll(line.substr(5, line.length() - 5).c_str()));
 				}
 				break;
@@ -53,7 +53,7 @@ int day6(int part)
 						line.erase(remove_if(line.begin(), line.end(), isspace), line.end());
 						if (num.length() > 0)
 						{
-							std::cout << num << '\n';
+							//std::cout << num << '\n';
 							distances.push_back(std::atoll(num.c_str()));
 						}
 					}
@@ -61,7 +61,7 @@ int day6(int part)
 				else
 				{
 					line.erase(remove_if(line.begin(), line.end(), isspace), line.end());
-					std::cout << line.substr(9, line.length() - 9) << '\n';
+					//std::cout << line.substr(9, line.length() - 9) << '\n';
 					distances.push_back(std::atoll(line.substr(9, line.length() - 9).c_str()));
 				}
 				break;
@@ -80,7 +80,7 @@ int day6(int part)
 				// distance = velocity * time
 				if (i * (r.time - i) > r.distance)
 				{
-					std::cout << i << "is a winning number for " << r.time << '\n';
+					//std::cout << i << "is a winning number for " << r.time << '\n';
 					currentWins++;
 				}
 			}

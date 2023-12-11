@@ -59,10 +59,10 @@ int day1(int part)
 					break;
 				}
 			}
-			std::cout << calibrationNumber << " + ";
+			//std::cout << calibrationNumber << " + ";
 			sum += std::stoi(calibrationNumber);
 		}
-		std::cout << "0 = ";
+		//std::cout << "0 = ";
 		std::cout << "final sum: " << sum << std::endl;
 	}
 	else {

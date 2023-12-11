@@ -147,8 +147,8 @@ int day3(int part)
 													}
 													current.append(std::string(1, lines.at(k)[n]));
 												}
-												std::cout << firstnumber << "first" << std::endl;
-												std::cout << current << "second" << std::endl;
+												//std::cout << firstnumber << "first" << std::endl;
+												//std::cout << current << "second" << std::endl;
 												firstnumber *= std::stoi(current);
 												sum += firstnumber;
 												std::cout << sum << std::endl;

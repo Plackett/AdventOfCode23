@@ -57,9 +57,9 @@ int day4(int part)
 			}
 			else
 			{
-				std::cout << "current card: " << cardIndex << '\n';
+				//std::cout << "current card: " << cardIndex << '\n';
 				winsPerCard.push_back(Card{ cardIndex, currentWinnings });
-				std::cout << currentWinnings << " wins at Card: " << winsPerCard.size() << '\n';
+				//std::cout << currentWinnings << " wins at Card: " << winsPerCard.size() << '\n';
 			}
 		}
 		if (part == 2)
@@ -72,7 +72,7 @@ int day4(int part)
 				for (int i = 0; i < duplicateCards.size(); i++)
 				{
 					cardsToErase++;
-					std::cout << "running Card:" << duplicateCards.at(i).index << '\n';
+					//std::cout << "running Card:" << duplicateCards.at(i).index << '\n';
 					currentCards = duplicateCards.at(i).data;
 					while (currentCards > 0)
 					{
