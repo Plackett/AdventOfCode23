@@ -60,26 +60,6 @@ Opening getOpenings(char shape)
 	return temp;
 }
 
-bool checkOpening(Pipe p1, Pipe p2, char direction)
-{
-	switch (direction)
-	{
-	case 'n':
-		return p1.open.north == p2.open.south;
-		break;
-	case 's':
-		return p1.open.south == p2.open.north;
-		break;
-	case 'e':
-		return p1.open.east == p2.open.west;
-		break;
-	case 'w':
-		return p1.open.west == p2.open.east;
-		break;
-	}
-	return false;
-}
-
 int day10(int part)
 {
 	std::fstream input("./input/day10input.txt");
@@ -109,14 +89,11 @@ int day10(int part)
 			}
 			currentLine++;
 		}
-		std::cout << "start at " << start.x << " " << start.y << '\n';
 		maxY = currentLine;
-		std::cout << "maximum Y = " << maxY << ". maximum X = " << maxX << '\n';
 		if (start.x < maxX)
 		{
 			if (originalMap.at(std::pair<int, int>(start.x + 1, start.y)).open.west)
 			{
-				std::cout << "loop start found at " << start.x + 1 << " " << start.y << '\n';
 				possibleLoops.push_back(originalMap.at(std::pair<int, int>(start.x + 1, start.y)));
 			}
 		}
@@ -124,7 +101,6 @@ int day10(int part)
 		{
 			if (originalMap.at(std::pair<int, int>(start.x - 1, start.y)).open.east)
 			{
-				std::cout << "loop start found at " << start.x - 1 << " " << start.y << '\n';
 				possibleLoops.push_back(originalMap.at(std::pair<int, int>(start.x - 1, start.y)));
 			}
 		}
@@ -132,7 +108,6 @@ int day10(int part)
 		{
 			if (originalMap.at(std::pair<int, int>(start.x, start.y + 1)).open.south)
 			{
-				std::cout << "loop start found at " << start.x << " " << start.y + 1 << '\n';
 				possibleLoops.push_back(originalMap.at(std::pair<int, int>(start.x, start.y + 1)));
 			}
 		}
@@ -140,7 +115,6 @@ int day10(int part)
 		{
 			if (originalMap.at(std::pair<int, int>(start.x, start.y - 1)).open.north)
 			{
-				std::cout << "loop start found at " << start.x << " " << start.y - 1 << '\n';
 				possibleLoops.push_back(originalMap.at(std::pair<int, int>(start.x, start.y - 1)));
 			}
 		}
@@ -155,11 +129,9 @@ int day10(int part)
 			currentLoop = {};
 			currentLoop.push_back(vec2(s.x, s.y));
 			currentLoop.push_back(vec2(start.x, start.y));
-			std::cout << "possible Loop at " << s.x << " " << s.y << '\n';
 			temp = s;
 			while (true)
 			{
-				std::cout << "running " << temp.x << " " << temp.y << '\n';
 				steps++;
 				if (steps == 2)
 				{
@@ -218,17 +190,35 @@ int day10(int part)
 		else
 		{
 			int count = 0;
-			std::vector<vec2> tempLoop{};
-			tempLoop.push_back(vec2(start.x, start.y));
-			for (size_t pos = 0; pos < currentLoop.size(); pos++)
+			bool inside = false;
+			for (int y = 0; y < maxY; y++)
 			{
-				tempLoop.push_back(currentLoop.at(pos));
-			}
-			tempLoop.push_back(vec2(start.x, start.y));
-			for (size_t pos = 0; pos < tempLoop.size()-1; pos++)
-			{
-				std::cout << "checking " << tempLoop[pos].x << " " << tempLoop[pos].y << '\n';
-				count += ( ( tempLoop.at(pos).x * tempLoop.at(pos + 1).y ) - ( tempLoop.at(pos).y * tempLoop.at(pos + 1).x) ) / 2;
+				inside = false;
+				for (int x = 0; x < maxX; x++)
+				{
+					if (inside == true && std::find(currentLoop.begin(), currentLoop.end(), vec2(x, y)) == currentLoop.end())
+					{
+						count++;
+					}
+					if (std::find(currentLoop.begin(), currentLoop.end(), vec2(x, y)) != currentLoop.end())
+					{
+						switch (originalMap.at(std::pair<int, int>(x, y)).shape)
+						{
+						case 'L':
+							inside = !inside;
+							break;
+						case 'S':
+							inside = !inside;
+							break;
+						case 'J':
+							inside = !inside;
+							break;
+						case '|':
+							inside = !inside;
+							break;
+						}
+					}
+				}
 			}
 			std::cout << count << " # of . in map inside of the loop " << '\n';
 		}

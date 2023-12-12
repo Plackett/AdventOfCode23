@@ -1,2 +1,6 @@
-﻿  daySelector.cpp
+﻿  day7.cpp
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day7.cpp(252,26): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day7.cpp(191): warning C4715: 'getStrengthPart2': not all control paths return a value
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day7.cpp(145): warning C4715: 'getStrength': not all control paths return a value
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day7.cpp(99): warning C4715: 'getType': not all control paths return a value
   AdventOfCodeDec2023.vcxproj -> C:\Users\johnn\Desktop\AdventOfCodeDec2023\x64\Debug\AdventOfCodeDec2023.exe

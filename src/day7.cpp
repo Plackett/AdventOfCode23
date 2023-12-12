@@ -5,10 +5,12 @@
 #include <string>
 #include <algorithm>
 
-typedef struct
+struct Card
 {
-	std::string hand; int type, bid;
-} Card;
+	std::string hand;
+	int type;
+	int bid;
+};
 
 /**
 * high card -- 0
@@ -190,7 +192,6 @@ int getStrengthPart2(char input)
 
 bool sortByCond(const Card& a, const Card& b)
 {
-	std::cout << a.hand << " " << b.hand << '\n';
 	if (a.type == b.type)
 	{
 		for (size_t i = 0; i < 5; ++i)
@@ -206,7 +207,7 @@ bool sortByCond2(const Card& a, const Card& b)
 {
 	if (a.type == b.type)
 	{
-		for (size_t i = 0; i < 5; ++i)
+		for (int i = 0; i < 5; ++i)
 		{
 			if (getStrengthPart2(a.hand[i]) != getStrengthPart2(b.hand[i]))
 				return getStrengthPart2(a.hand[i]) > getStrengthPart2(b.hand[i]);
@@ -218,21 +219,26 @@ bool sortByCond2(const Card& a, const Card& b)
 int day7(int part)
 {
 	std::fstream input("./input/day7input.txt");
-	std::string line{};
+	std::string line = "";
 	std::vector<Card> cards{};
-
+	Card temp{};
 	if (input.is_open())
 	{
 		while (std::getline(input, line))
 		{
-			Card temp{};
 			temp.bid = std::stoi(split(line, " ")[1]);
 			temp.hand = split(line, " ")[0];
 			temp.type = getType(temp.hand, part);
 			cards.push_back(temp);
+			std::cout << cards[cards.size() - 1].hand << " " << temp.hand << '\n';
+		}
+		for (size_t i = 0; i < cards.size(); ++i)
+		{
+			std::cout << cards.at(i).hand << " index: " << i << '\n';
 		}
 		if (part == 1)
 		{
+			// errors here
 			std::sort(cards.begin(), cards.end(), sortByCond);
 		}
 		else

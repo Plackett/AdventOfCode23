@@ -25,6 +25,7 @@
     <ClCompile Include="src\day1.cpp" />
     <ClCompile Include="src\day10.cpp" />
     <ClCompile Include="src\day11.cpp" />
+    <ClCompile Include="src\day12.cpp" />
     <ClCompile Include="src\day2.cpp" />
     <ClCompile Include="src\day3.cpp" />
     <ClCompile Include="src\day4.cpp" />
@@ -63,6 +64,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <EnableASAN>true</EnableASAN>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
