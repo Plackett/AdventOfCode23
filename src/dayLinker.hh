@@ -26,6 +26,19 @@ inline std::vector<std::string> split(std::string s, std::string delimiter) {
 	return res;
 }
 
+// from github https://github.com/charlescochran/aoc-2023/blob/main/day13.cpp
+inline unsigned hamming(const std::string& str1, const std::string& str2)
+{
+    // Return the Hamming distance between the input strings (the number of
+    // characters that differ).
+    unsigned dist = 0;
+    for (unsigned i = 0; i < str1.size(); i++)
+    {
+        dist += (str1[i] != str2[i]);
+    }
+    return dist;
+}
+
 typedef struct {
     std::future<int>* outputfailstate;
 

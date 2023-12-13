@@ -45,57 +45,160 @@ int day13(int part)
 				}
 				columns.push_back(column);
 			}
-			for (size_t i = 0; i < rows.size(); i++)
+			bool mirrorCheck = true;
+			for (size_t i = 1; i < rows.size(); i++)
 			{
-				if (i == rows.size() - 1)
+				if (part == 1)
 				{
 					if (rows[i] == rows[i - 1])
 					{
-						std::cout << " found mirror in chunk " << chunk << " at row " << rows[i] << '\n';
-						totalCount += 100 * (rows[i].length() - i);
-						break;
+						mirrorCheck = true;
+						for (int front = i, back = i - 1; back < rows.size(); front--, back++)
+						{
+							if (front <= -1)
+								break;
+							if (rows[front] != rows[back] && front != i && front != i - 1 && back != i && back != i - 1)
+							{
+								mirrorCheck = false;
+								break;
+							}
+						}
+						if (mirrorCheck)
+						{
+							std::cout << " found mirror in chunk" << chunk << "between rows " << i << " and " << i - 1 << '\n';
+							totalCount += i * 100;
+							goto finish;
+						}
 					}
 				}
 				else
 				{
-					if (rows[i] == rows[i + 1] || rows[i] == rows[i - 1])
+					if (chunk == 20)
+						std::cout << "Here" << '\n';
+					if (hamming(rows[i], rows[i - 1]) == 1)
 					{
-						std::cout << " found mirror in chunk " << chunk << " at row " << rows[i] << '\n';
-						totalCount += 100 * (rows[i].length() - i);
-						break;
+						//rows[i - 1] = rows[i];
+						mirrorCheck = true;
+						for (int back = i, front = i - 1; back < rows.size(); front--, back++)
+						{
+							if (front <= -1)
+								break;
+							if (rows[front] != rows[back] && front != i && front != i - 1 && back != i && back != i - 1)
+							{
+								mirrorCheck = false;
+								break;
+							}
+						}
+						if (mirrorCheck)
+						{
+							std::cout << " found mirror in chunk" << chunk << "between rows " << i << " and " << i - 1 << '\n';
+							totalCount += i * 100;
+							goto finish;
+						}
+					}
+					else if (rows[i] == rows[i - 1])
+					{
+						mirrorCheck = false;
+						for (int back = i, front = i - 1; back < rows.size(); front--, back++)
+						{
+							if (front <= -1)
+								break;
+							if (hamming(rows[front], rows[back]) == 1)
+							{
+								mirrorCheck = true;
+								//rows[front] = rows[back];
+							}
+							else if (rows[front] != rows[back] && front != i && front != i - 1 && back != i && back != i - 1)
+							{
+								mirrorCheck = false;
+								break;
+							}
+						}
+						if (mirrorCheck)
+						{
+							std::cout << " found mirror in chunk" << chunk << "between rows " << i << " and " << i - 1 << '\n';
+							totalCount += i * 100;
+							goto finish;
+						}
 					}
 				}
 			}
-			for (size_t i = 0; i < columns.size(); i++)
+			for (size_t i = 1; i < columns.size(); i++)
 			{
-				if (i == 0)
-				{
-					if (columns[i] == columns[i + 1])
-					{
-						std::cout << " found mirror in chunk " << chunk << " at column " << columns[i] << '\n';
-						totalCount += (columns[i].length() - i);
-						break;
-					}
-				}
-				else if (i == columns.size() - 1)
+				if (part == 1)
 				{
 					if (columns[i] == columns[i - 1])
 					{
-						std::cout << " found mirror in chunk " << chunk << " at column " << columns[i] << '\n';
-						totalCount += (columns[i].length() - i);
-						break;
+						mirrorCheck = true;
+						for (int back = i, front = i - 1; back < columns.size(); front--, back++)
+						{
+							if (front <= -1)
+								break;
+							if (columns[front] != columns[back] && front != i && front != i - 1 && back != i && back != i - 1)
+							{
+								mirrorCheck = false;
+								break;
+							}
+						}
+						if (mirrorCheck)
+						{
+							std::cout << " found mirror in chunk" << chunk << "between columns " << i << " and " << i - 1 << '\n';
+							totalCount += i;
+							goto finish;
+						}
 					}
 				}
 				else
 				{
-					if (columns[i] == columns[i + 1] || columns[i] == columns[i - 1])
+					if (hamming(columns[i], columns[i - 1]) == 1)
 					{
-						std::cout << " found mirror in chunk " << chunk << " at column " << columns[i] << '\n';
-						totalCount += (columns[i].length() - i);
-						break;
+						//columns[i - 1] = columns[i];
+						mirrorCheck = true;
+						for (int back = i, front = i - 1; back < columns.size(); front--, back++)
+						{
+							if (front <= -1)
+								break;
+							if (columns[front] != columns[back] && front != i && front != i - 1 && back != i && back != i - 1)
+							{
+								mirrorCheck = false;
+								break;
+							}
+						}
+						if (mirrorCheck)
+						{
+							std::cout << " found mirror in chunk" << chunk << "between columns " << i << " and " << i - 1 << '\n';
+							totalCount += i;
+							goto finish;
+						}
+					}
+					else if (columns[i] == columns[i - 1])
+					{
+						mirrorCheck = false;
+						for (int back = i, front = i - 1; back < columns.size(); front--, back++)
+						{
+							if (front <= -1)
+								break;
+							if (hamming(columns[front], columns[back]) == 1)
+							{
+								mirrorCheck = true;
+								//columns[front] = columns[back];
+							}
+							else if (columns[front] != columns[back] && front != i && front != i - 1 && back != i && back != i - 1)
+							{
+								mirrorCheck = false;
+								break;
+							}
+						}
+						if (mirrorCheck)
+						{
+							std::cout << " found mirror in chunk" << chunk << "between columns " << i << " and " << i - 1 << '\n';
+							totalCount += i;
+							goto finish;
+						}
 					}
 				}
 			}
+		finish:
 			std::cout << "chunk count = " << totalCount << '\n';
 		}
 		std::cout << "total count: " << totalCount << '\n';

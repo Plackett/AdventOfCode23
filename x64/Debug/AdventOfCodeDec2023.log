@@ -1,6 +1,20 @@
-﻿  day7.cpp
-C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day7.cpp(256,26): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day7.cpp(195): warning C4715: 'getStrengthPart2': not all control paths return a value
-C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day7.cpp(149): warning C4715: 'getStrength': not all control paths return a value
-C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day7.cpp(103): warning C4715: 'getType': not all control paths return a value
+﻿  day13.cpp
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day13.cpp(56,22): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day13.cpp(56,32): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day13.cpp(69,24): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day13.cpp(82,21): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day13.cpp(82,32): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day13.cpp(95,24): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day13.cpp(102,21): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day13.cpp(102,32): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day13.cpp(120,24): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day13.cpp(133,21): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day13.cpp(133,32): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day13.cpp(146,22): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day13.cpp(157,21): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day13.cpp(157,32): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day13.cpp(170,22): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day13.cpp(177,21): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day13.cpp(177,32): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\johnn\Desktop\AdventOfCodeDec2023\src\day13.cpp(195,22): warning C4267: '+=': conversion from 'size_t' to 'int', possible loss of data
   AdventOfCodeDec2023.vcxproj -> C:\Users\johnn\Desktop\AdventOfCodeDec2023\x64\Debug\AdventOfCodeDec2023.exe
