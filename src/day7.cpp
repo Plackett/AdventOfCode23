@@ -12,6 +12,10 @@ struct Card
 	int bid;
 };
 
+inline Card make_card(std::string hand, int type, int bid) {
+	return { hand, type, bid };
+}
+
 /**
 * high card -- 0
 * one pair -- 1
@@ -218,20 +222,19 @@ bool sortByCond2(const Card& a, const Card& b)
 
 int day7(int part)
 {
-	std::fstream input("./input/day7input.txt");
+	auto rawFileBuffer = readfile_cpp("./input/day7input.txt");
+	std::cout << rawFileBuffer << '\n';
+	std::istringstream filebuffer(rawFileBuffer);
 	std::string line = "";
-	std::vector<Card> cards{};
-	Card temp{};
-	if (input.is_open())
-	{
-		while (std::getline(input, line))
+	std::vector<Card> cards;
+	cards.reserve(10);
+	int lineNumber = 0;
+		while (std::getline(filebuffer, line))
 		{
-			temp.bid = std::stoi(split(line, " ")[1]);
-			temp.hand = split(line, " ")[0];
-			temp.type = getType(temp.hand, part);
-			cards.push_back(temp);
-			std::cout << cards[cards.size() - 1].hand << " " << temp.hand << '\n';
+			lineNumber++;
+			cards.push_back( make_card(split(line, " ")[0], getType(split(line, " ")[0], part),std::stoi(split(line, " ")[1])) );
 		}
+		std::cout << "stopp";
 		for (size_t i = 0; i < cards.size(); ++i)
 		{
 			std::cout << cards.at(i).hand << " index: " << i << '\n';
@@ -252,10 +255,5 @@ int day7(int part)
 			total += cards[i].bid * (cards.size() - i);
 		}
 		std::cout << "total winings= " << total << '\n';
-	}
-	else
-	{
-		std::cerr << "missing input file.. exiting!" << std::endl;
-	}
 	return 0;
 }

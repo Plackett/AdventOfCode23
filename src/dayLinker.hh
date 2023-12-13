@@ -7,6 +7,9 @@
 #include <string>
 #include <iostream>
 #include <numeric>
+#include <fstream>
+#include <future>
+#include <sstream>
 // for string delimiter
 inline std::vector<std::string> split(std::string s, std::string delimiter) {
 	size_t pos_start = 0, pos_end, delim_len = delimiter.length();
@@ -21,6 +24,40 @@ inline std::vector<std::string> split(std::string s, std::string delimiter) {
 
 	res.push_back(s.substr(pos_start));
 	return res;
+}
+
+typedef struct {
+    std::future<int>* outputfailstate;
+
+    const char* stringbuffer;
+} rfoutput;
+
+inline std::string readfile_cpp(const char* filename) {
+    static unsigned called{ 0 };
+    std::ifstream infile(filename, std::ios::binary | std::ios::in);
+    std::string buffer = "Failed to open";
+    infile.seekg(0, std::ios::end);
+    buffer.resize(infile.tellg());
+
+    infile.seekg(0, std::ios::beg);
+    infile.read(&buffer[0], buffer.size());
+
+    infile.close();
+
+    ///OPTIONAL ///
+    auto outfailstate = std::async([](std::string toLog, unsigned called)->int {
+        std::ostringstream fname;
+        fname << "dump" << called << ".dump";
+
+        std::ofstream out(fname.str().c_str(), std::ios::out | std::ios::binary);
+        if (not out.is_open()) return -1;
+        out << toLog;
+        out.close();
+        return 1;
+        }, buffer, called++);
+    ///OPTIONAL ///
+
+    return buffer;
 }
 
 template <typename val_T>
