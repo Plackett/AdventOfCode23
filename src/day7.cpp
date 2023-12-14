@@ -222,23 +222,24 @@ bool sortByCond2(const Card& a, const Card& b)
 
 int day7(int part)
 {
-	auto rawFileBuffer = readfile_cpp("./input/day7input.txt");
+	/*auto rawFileBuffer = readfile_cpp("./input/day7input.txt");
 	std::cout << rawFileBuffer << '\n';
-	std::istringstream filebuffer(rawFileBuffer);
+	std::stringstream filebuffer(rawFileBuffer);
+	*/
+	std::fstream filebuffer("./input/day7input.txt");
 	std::string line = "";
-	std::vector<Card> cards;
+	std::vector<Card> cards{};
 	cards.reserve(10);
 	int lineNumber = 0;
 		while (std::getline(filebuffer, line))
 		{
+			if (lineNumber == 1000)
+				break;
 			lineNumber++;
-			cards.push_back( make_card(split(line, " ")[0], getType(split(line, " ")[0], part),std::stoi(split(line, " ")[1])) );
+			std::cout << split(line, " ")[0] << "|" << split(line, " ")[1] << '\n';
+			cards.emplace_back( Card(split(line, " ")[0], getType(split(line, " ")[0], part),std::stoi(split(line, " ")[1])) );
 		}
 		std::cout << "stopp";
-		for (size_t i = 0; i < cards.size(); ++i)
-		{
-			std::cout << cards.at(i).hand << " index: " << i << '\n';
-		}
 		if (part == 1)
 		{
 			// errors here
