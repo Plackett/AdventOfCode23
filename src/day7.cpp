@@ -4,13 +4,13 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+#include <map>
 
-struct Card
-{
+typedef struct {
 	std::string hand;
 	int type;
 	int bid;
-};
+} Card;
 
 inline Card make_card(std::string hand, int type, int bid) {
 	return { hand, type, bid };
@@ -227,17 +227,18 @@ int day7(int part)
 	std::stringstream filebuffer(rawFileBuffer);
 	*/
 	std::fstream filebuffer("./input/day7input.txt");
-	std::string line = "";
+	std::string line{};
 	std::vector<Card> cards{};
-	cards.reserve(10);
-	int lineNumber = 0;
+	if (filebuffer.is_open())
+	{
+		int lineNumber = 0;
 		while (std::getline(filebuffer, line))
 		{
 			if (lineNumber == 1000)
 				break;
 			lineNumber++;
 			std::cout << split(line, " ")[0] << "|" << split(line, " ")[1] << '\n';
-			cards.emplace_back( Card(split(line, " ")[0], getType(split(line, " ")[0], part),std::stoi(split(line, " ")[1])) );
+			cards.emplace_back(make_card(split(line, " ")[0], getType(split(line, " ")[0], part), std::stoi(split(line, " ")[1]) ));
 		}
 		std::cout << "stopp";
 		if (part == 1)
@@ -252,9 +253,14 @@ int day7(int part)
 		int total = 0;
 		for (int i = 0; i < cards.size(); i++)
 		{
-			//std::cout << "{ hand: \'" << cards[i].hand << "\', bid: \'" << cards[i].bid << "\', power: " << cards[i].type << " }" << '\n';
+			std::cout << "{ hand: \'" << cards[i].hand << "\', bid: \'" << cards[i].bid << "\', power: " << cards[i].type << " }" << '\n';
 			total += cards[i].bid * (cards.size() - i);
 		}
 		std::cout << "total winings= " << total << '\n';
+	}
+	else
+	{
+		std::cerr << "missing input file.. exiting!" << std::endl;
+	}
 	return 0;
 }
