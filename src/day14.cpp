@@ -4,20 +4,36 @@
 #include <string>
 #include <vector>
 
-std::vector<std::string> spinCycle(std::vector<std::string> input, std::vector<std::pair<int,int>> roundRocks)
+int calculateLoad(std::vector<std::string> platform)
+{
+	int totalCount = 0;
+	for (size_t i = 0; i < platform.size(); i++)
+	{
+		for (int j = 0; j < platform[i].length(); j++)
+		{
+			if (platform[i][j] == 'O')
+			{
+				totalCount += platform.size() - i;
+			}
+		}
+	}
+	return totalCount;
+}
+
+std::vector<std::string> spinCycle(std::vector<std::string> input)
 {
 	// north
-	for (int i = 0; i < roundRocks.size(); i++)
+	for (size_t j = 0; j < input[0].length(); j++)
 	{
-		if (roundRocks[i].second > 0)
+		for (size_t i = input.size() - 1; i >= 1; i--)
 		{
-			for (int j = roundRocks[i].second; j > 0; j--)
+			while (true)
 			{
-				if (input[roundRocks[i].second - 1][roundRocks[i].first] == '.')
+				if (input[i - 1][j] == '.' && input[i][j] == 'O')
 				{
-					input[roundRocks[i].second - 1][roundRocks[i].first] = 'O';
-					input[roundRocks[i].second][roundRocks[i].first] = '.';
-					roundRocks[i].second--;
+					input[i - 1][j] = 'O';
+					input[i][j] = '.';
+					if (i < input.size()-1) i++;
 				}
 				else
 				{
@@ -27,17 +43,17 @@ std::vector<std::string> spinCycle(std::vector<std::string> input, std::vector<s
 		}
 	}
 	// west
-	for (int i = 0; i < roundRocks.size(); i++)
+	for (size_t i = 0; i < input.size(); i++)
 	{
-		if (roundRocks[i].first > 0)
+		for (size_t j = 1; j < input[i].length(); j++)
 		{
-			for (int j = roundRocks[i].first; j > 0; j--)
+			while (true)
 			{
-				if (input[roundRocks[i].second][roundRocks[i].first - 1] == '.')
+				if (input[i][j - 1] == '.' && input[i][j] == 'O')
 				{
-					input[roundRocks[i].second][roundRocks[i].first - 1] = 'O';
-					input[roundRocks[i].second][roundRocks[i].first] = '.';
-					roundRocks[i].first--;
+					input[i][j - 1] = 'O';
+					input[i][j] = '.';
+					if (j > 1) j--;
 				}
 				else
 				{
@@ -47,19 +63,17 @@ std::vector<std::string> spinCycle(std::vector<std::string> input, std::vector<s
 		}
 	}
 	// south
-	for (int i = roundRocks.size(); i > -1; i--)
+	for (size_t j = 0; j < input[0].length(); j++)
 	{
-		if (roundRocks[i].second < input.size() - 1)
+		for (size_t i = 0; i < input.size() - 1; i++)
 		{
-			while(true)
+			while (true)
 			{
-				if (roundRocks[i].second == input.size() - 1)
-					break;
-				if (input[roundRocks[i].second + 1][roundRocks[i].first] == '.')
+				if (input[i+1][j] == '.' && input[i][j] == 'O')
 				{
-					input[roundRocks[i].second + 1][roundRocks[i].first] = 'O';
-					input[roundRocks[i].second][roundRocks[i].first] = '.';
-					roundRocks[i].second++;
+					input[i+1][j] = 'O';
+					input[i][j] = '.';
+					if (i > 0) i--;
 				}
 				else
 				{
@@ -69,19 +83,17 @@ std::vector<std::string> spinCycle(std::vector<std::string> input, std::vector<s
 		}
 	}
 	// east
-	for (int i = roundRocks.size(); i > -1; i--)
+	for (size_t i = 0; i < input.size(); i++)
 	{
-		if (roundRocks[i].first < input[0].length() - 1)
+		for (int j = input[i].length() - 1; j > -1; j--)
 		{
-			while(true)
+			while (true)
 			{
-				if (roundRocks[i].first == input[0].length() - 1)
-					break;
-				if (input[roundRocks[i].second][roundRocks[i].first + 1] == '.')
+				if (input[i][j + 1] == '.' && input[i][j] == 'O')
 				{
-					input[roundRocks[i].second][roundRocks[i].first + 1] = 'O';
-					input[roundRocks[i].second][roundRocks[i].first] = '.';
-					roundRocks[i].first++;
+					input[i][j + 1] = 'O';
+					input[i][j] = '.';
+					if (j < input[i].length() - 2) j++;
 				}
 				else
 				{
@@ -91,6 +103,29 @@ std::vector<std::string> spinCycle(std::vector<std::string> input, std::vector<s
 		}
 	}
 	return input;
+}
+
+int getStartIndex(std::vector<std::vector<std::string>> patterns, std::vector < std::string> platform)
+{
+	for (size_t l = 0; l < patterns.size(); l++)
+	{
+		bool equal = true;
+		for (size_t i = 0; i < platform.size(); i++)
+		{
+			for (size_t j = 0; j < platform[i].length(); j++)
+			{
+				if (platform[i][j] != patterns[l][i][j])
+				{
+					equal = false;
+					goto next;
+				}
+			}
+		}
+	next:
+		if (equal == true)
+			return l;
+	}
+	return -1;
 }
 
 int day14(int part)
@@ -139,22 +174,23 @@ int day14(int part)
 		}
 		else
 		{
-			for (long long i = 0; i < 1000000000; i++)
-			{
-				platform = spinCycle(platform, roundedRocks);
-			}
-		}
-		int totalCount = 0;
-		for (size_t i = 0; i < platform.size(); i++)
-		{
-			for (int j = 0; j < platform[i].length(); j++)
-			{
-				if (platform[i][j] == 'O')
+			long long needed_iteration = 1000000000;
+			std::vector<std::vector<std::string>> patterns{};
+			for (long long i = 0; i < needed_iteration; i++) {
+				if (getStartIndex(patterns, platform) != -1)
 				{
-					totalCount += platform.size() - i;
+					// time skip by the length of the cycle...
+					i = needed_iteration - ((needed_iteration - i) % (i - getStartIndex(patterns, platform)));
 				}
+				else
+				{
+					patterns.emplace_back(platform);
+				}
+
+				platform = spinCycle(platform);
 			}
 		}
+		int totalCount = calculateLoad(platform);
 		std::cout << "total load is " << totalCount << '\n';
 	}
 	else
